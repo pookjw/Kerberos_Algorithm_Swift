@@ -2,13 +2,13 @@
 
 Not a real Kerberos. It doens't communicate with servers. Just commutes with Swift-class with Kerberos algorithm.
 
-Used AES-128 with [krzyzanowskim/CryptoSwift#calculate-digest](https://github.com/krzyzanowskim/CryptoSwift#calculate-digest).
+Used AES-128 with [krzyzanowskim/CryptoSwift#calculate-digest](https://github.com/krzyzanowskim/CryptoSwift).
 
 ## How to use
 
 **This project is still in progress**
 
-1. Add **CryptoSwift.framework** from [krzyzanowskim/CryptoSwift#calculate-digest](https://github.com/krzyzanowskim/CryptoSwift#calculate-digest).
+1. Add **CryptoSwift.framework** from [krzyzanowskim/CryptoSwift#calculate-digest](https://github.com/krzyzanowskim/CryptoSwift).
 
 2. Initialize `Person` and `Servers`.
 
