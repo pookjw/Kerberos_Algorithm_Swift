@@ -10,11 +10,13 @@ Used AES-128 with [krzyzanowskim/CryptoSwift#calculate-digest](https://github.co
 
 1. Add **CryptoSwift.framework** from [krzyzanowskim/CryptoSwift#calculate-digest](https://github.com/krzyzanowskim/CryptoSwift).
 
-2. Initialize `Person` and `Servers`.
+2. Initialize `Person` and `Servers`. And register person to AS.
 
 `let person = Person(id: "HelloThereHelloT", password: "ByeByeByeByeByeB")` // all values must be 16 characters
 
 `let server = Servers()` // Secret Key and Each Session Key of servers are initialized and delegated (by `protocol Session_Protocol: AnyObject`).
+
+`try server1.AS.register(id: person.id, password: person.password)`
 
 3. Get Token1 (MessageA - encrypted TCG Session Key). MessageB is dropped because it isn't used on this script.
 
