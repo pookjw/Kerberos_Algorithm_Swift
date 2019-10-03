@@ -18,7 +18,7 @@ Used AES-128 with [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/C
 
 `try server1.AS.register(id: person.id, password: person.password)`
 
-3. Get Token1 (MessageA - encrypted TCG Session Key). MessageB is dropped because it isn't used on this script.
+3. Get Token1 (MessageA - encrypted TCG Session Key). MessageB is dropped because it isn't used in this script.
 
 `let Token1 = try server1.AS.stage1(id: person.id)`
 
