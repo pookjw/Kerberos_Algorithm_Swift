@@ -1,6 +1,6 @@
 # Kerberos_Modeling_Swift
 
-Not a real Kerberos. It doens't communicate with servers. Just commutes with Swift-class with Kerberos.
+Not a real Kerberos. It doens't communicate with servers. Just commutes with Swift-class with Kerberos algorithm.
 
 Used AES-128 with [krzyzanowskim/CryptoSwift#calculate-digest](https://github.com/krzyzanowskim/CryptoSwift#calculate-digest).
 
