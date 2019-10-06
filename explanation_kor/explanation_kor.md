@@ -1,6 +1,6 @@
 # Kerberos Modeling Swift
 
-Swift로 코딩된 Kerberos Modeling입니다. 실제 Kerberos는 아니며 알고리즘만 구현했으며, 서버와 통신하지 않고 Swift 내의 class와 local로 통신합니다.
+Swift로 코딩된 Kerberos Modeling입니다. 실제 Kerberos는 아니며 알고리즘만 구현했으며, 서버와 통신하지 않고 Swift 내의 class와 통신합니다.
 
 [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift)의 AES-128 암호화 기법을 사용했습니다. Wekipedia의 [Kerberos (protocol)](https://en.wikipedia.org/wiki/Kerberos_(protocol))을 참고했습니다.
 
