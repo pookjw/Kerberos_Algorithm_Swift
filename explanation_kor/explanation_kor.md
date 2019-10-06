@@ -41,7 +41,7 @@ Authentication Server는 AS, Ticket Granting Servic는 TGS, Service Server는 SS
 
 `var session = Session()`
 
-위 코드로 session이라 불리는 세션을 정의합니다. TGS와 SS의 Secret Key는 랜덤으로 자동으로 생성되며, 이 키들은 3개의 서버끼리 `protocol Server: AnyObject`로 공유됩니다.
+위 코드로 session이라 불리는 세션을 정의합니다. TGS와 SS의 Secret Key는 랜덤으로 자동으로 생성되며, 이 키들은 3개의 서버끼리 `protocol Server: AnyObject`로 delegation됩니다.
 
 2. 클라이언트 정의
 
