@@ -4,6 +4,8 @@ Not a real Kerberos. It doesn't communicate with servers. Just commutes with Swi
 
 Used AES-128 with [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift).
 
+한국어 (Korean) : [explanation_kor.md](explanation_kor/explanation_kor.md)
+
 ## How it works
 
 1. Client sends ID to AS

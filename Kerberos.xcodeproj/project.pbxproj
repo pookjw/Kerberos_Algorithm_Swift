@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F320403C234A6FF200FB4D00 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F35AFC2923461CF900618865 /* CryptoSwift.framework */; };
+		F320403D234A6FF200FB4D00 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F35AFC2923461CF900618865 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F35AFC1C23461CCB00618865 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35AFC1B23461CCB00618865 /* main.swift */; };
 		F388E6C0234A2DBC0038F7D2 /* kerberos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F388E6BF234A2DBC0038F7D2 /* kerberos.swift */; };
 /* End PBXBuildFile section */
@@ -27,6 +29,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F320403D234A6FF200FB4D00 /* CryptoSwift.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -47,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F320403C234A6FF200FB4D00 /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
