@@ -61,7 +61,6 @@ class Client{
             throw CLIENT_ERROR.TOKEN3_IS_NIL
         }
         var result = Token4()
-        // encrypted_client_id_with_server_session
         server_session_key = try token3!.encrypted_server_session_key_with_tgs_session.decrypt(key: tgs_session_key, iv: tgs_session_iv)
         server_session_iv = try token3!.encrypted_server_seesion_iv_with_tgs_session.decrypt(key: tgs_session_key, iv: tgs_session_iv)
         let encrypted_client_id_with_server_session = try client_id.encrypt(key: server_session_key, iv: server_session_iv)

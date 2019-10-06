@@ -20,7 +20,7 @@ These are combined on Token1.
 
 - messageC : messageB
 
-- messageD : Authenticator (client ID encrypted) using the TGS session key (from messageA)
+- messageD : Authenticator (client ID encrypted) with the TGS session key (from messageA)
 
 These are combined on Token2. Now Client knows TGS Session Key from messageA.
 
