@@ -55,9 +55,9 @@ Authentication Server는 AS, Ticket Granting Servic는 TGS, Service Server는 SS
 
 Token1에는
 
-- messageA : 클라이언트의 키로 암호화된 TGS Session Key'
+- messageA : 클라이언트의 키로 암호화된 TGS Session Key
 
-- messageB : TGS Secret Key로 암호화된 TGT (클라이언트 ID가 포함됨)'
+- messageB : TGS Secret Key로 암호화된 TGT (클라이언트 ID가 포함됨)
 
 들이 포함되어 있습니다. 이를 client.token1에 저장합니다.
 
