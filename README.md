@@ -4,49 +4,49 @@ Not a real Kerberos. It doesn't communicate with servers. Just commutes with Swi
 
 Used AES-128 with [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift).
 
-## How to use
+## How it works
 
-**This project is still in progress**
+1. Client sends ID to AS
 
-1. Add **CryptoSwift.framework** from [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift).
+2. AS gives:
 
-2. Initialize `Person` and `Servers`. And register person to AS.
+- messageA : TGS Session Key encrypted with the client secret key
 
-`let person = Person(id: "HelloThereHelloT", password: "ByeByeByeByeByeB")` // all values must be 16 characters
+- messageB : TGT (client ID, TGS session key) encrypted with the TGS secret key
 
-`let server = Servers()` // Secret Key and Each Session Key of servers are initialized and delegated (by `protocol Session_Protocol: AnyObject`).
+These are combined on Token1.
 
-`try server1.AS.register(id: person.id, password: person.password)`
+3. Client attempts to decrypt messageA, and client sends the following messages to the TGS
 
-3. Get Token1 (MessageA - encrypted TCG Session Key). MessageB is dropped because it isn't used in this script.
+- messageC : messageB
 
-`let Token1 = try server1.AS.stage1(id: person.id)`
+- messageD : Authenticator (client ID encrypted) using the TGS session key (from messageA)
 
-4. Decrypt MessageA with `person.password`. That is decrypted TCG Session Key. 
+These are combined on Token2. Now Client knows TGS Session Key from messageA.
 
-`let Token2 = try person.stage1(message: Token1.message, iv: Token1.iv)`
+4. The TGS retrieves messageC and decrypts using TGS secret key and gets TGS session key. Using this key, the TGS decrypts messageD and compare client ID from C and D. If they match,'
 
-5. Verify TGS Session Key. If key is same, returns TGT (with `person.id` encrypted with Secret Key), and `person.id` encrypted with AS Session Key. (MessageC and MessageD). Call it as Token3.
+- messageE : Client-to-server ticket (client ID, Server Session Key) encrypted using the Server secret key
 
-`let Token3 = try person.AS.stage2(tgs_session_key: Token2, id: person.id)`
+- messageF : Server Session Key encypted using TGS Session key (from messageC)
 
-6. TGS verifies Token4 and return Ticket (MessageE - includes ID encrypted with secret key), and Server Session Key (MessageF). Call it as Token4.
+These are combined on Token3.
 
-`let Token4 = try server1.TGS.stage1(TGT: Token3.TGT, encrypted_id: Token3.encrypted_id)`
+5. Client receives E and F. Now client knows Server Session Key from messageF (TGS Session Key can get from messageA)
 
-7. Encrypt `person.id` with Server Session Key (MessageG). Call it as Token4.
+- messageE : messageE from the previous step
 
-`let Token5 = try person.stage2(server_session_key: Token4.server_session_key, server_session_iv: Token4.server_session_iv)`
+- messageG : another Authenticator (client ID) encrypted using Server Seesion key 
+ 
+ These are combined on Token4.
+ 
+6. SS decrypts messageE using Server secret key and gets Server Session Key. Using this Server Session Key, SS decrypts messageG and compare client ID. If match,
 
-8. SS verifies MessageE and MessageG. And return "SUCCESS!!!!!!!!!" encrypted with SS Session Key. (MessageH)
+- messageH : timestamp encrypted using Server Session Key.
 
-`let Token6 = try server1.SS.stage1(ticket: Token4.ticket, encrypted_id: Token5)`
+This is called on Token5.
 
-9. person verifies Token6 with Token4's Server Session Key.
-
-`try person.stage3(final_message: Token6, server_session_key: Token4.server_session_key, server_session_iv: Token4.server_session_iv)`
-
-Then will print `Success!`.
+7. Client gets messageH and check timestamp.
 
 ## Reference
 
