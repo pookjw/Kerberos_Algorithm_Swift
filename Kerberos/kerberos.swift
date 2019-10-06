@@ -224,7 +224,7 @@ struct Token4{
 
 struct Token5{
     var timestamp = Array<UInt8>()
-    var encrypted_timestamp_with_server_session = Array<UInt8>() // messageD
+    var encrypted_timestamp_with_server_session = Array<UInt8>() // messageH
 }
 
 func randomString() -> String {
