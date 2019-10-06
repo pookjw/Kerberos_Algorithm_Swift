@@ -10,4 +10,4 @@ macOS 10.15 Beta (19A582a), Xcode 11.2 beta에서 테스트했습니다. Swift �
 
 ## 사용법
 
-![1](explanation_kor/1)
+![1](explanation_kor/1.png)
