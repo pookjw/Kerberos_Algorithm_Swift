@@ -7,23 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F33D216423467C5B005944A8 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F35AFC2923461CF900618865 /* CryptoSwift.framework */; };
-		F33D216523467C5B005944A8 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F35AFC2923461CF900618865 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F35AFC1C23461CCB00618865 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35AFC1B23461CCB00618865 /* main.swift */; };
+		F388E6C0234A2DBC0038F7D2 /* kerberos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F388E6BF234A2DBC0038F7D2 /* kerberos.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		F33D216623467C5B005944A8 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				F33D216523467C5B005944A8 /* CryptoSwift.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F35AFC1623461CCB00618865 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,6 +21,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		F388E6BE234A0A260038F7D2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +38,8 @@
 		F35AFC1823461CCB00618865 /* Kerberos */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Kerberos; sourceTree = BUILT_PRODUCTS_DIR; };
 		F35AFC1B23461CCB00618865 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F35AFC2923461CF900618865 /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F388E68E234A07AB0038F7D2 /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F388E6BF234A2DBC0038F7D2 /* kerberos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kerberos.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +47,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F33D216423467C5B005944A8 /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				F35AFC1B23461CCB00618865 /* main.swift */,
+				F388E6BF234A2DBC0038F7D2 /* kerberos.swift */,
 			);
 			path = Kerberos;
 			sourceTree = "<group>";
@@ -82,6 +82,7 @@
 		F35AFC2823461CF900618865 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F388E68E234A07AB0038F7D2 /* CryptoSwift.framework */,
 				F33D2151234627C1005944A8 /* CryptoSwift.framework */,
 				F35AFC2923461CF900618865 /* CryptoSwift.framework */,
 			);
@@ -98,7 +99,7 @@
 				F35AFC1423461CCB00618865 /* Sources */,
 				F35AFC1523461CCB00618865 /* Frameworks */,
 				F35AFC1623461CCB00618865 /* CopyFiles */,
-				F33D216623467C5B005944A8 /* Embed Frameworks */,
+				F388E6BE234A0A260038F7D2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -148,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F35AFC1C23461CCB00618865 /* main.swift in Sources */,
+				F388E6C0234A2DBC0038F7D2 /* kerberos.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
