@@ -37,7 +37,7 @@ Authentication Server는 AS, Ticket Granting Servic는 TGS, Service Server는 SS
 
 또한 Ticket Granting Ticket은 TGT라고 줄이겠습니다.
 
-1. 서버 세선 정의
+1. 서버 세션 정의
 
 `var session = Session()`
 
@@ -67,11 +67,11 @@ Token1에는
 
 `client.token2 = try client.stage3()`
 
-클라이언트는 Token1의 messageA를 자신의 클라이언트 Key로 복호화해서 TGS 세선키를 획득합니다. 그리고 Token2를 생성합니다.
+클라이언트는 Token1의 messageA를 자신의 클라이언트 Key로 복호화해서 TGS Session Key를 획득합니다. 그리고 Token2를 생성합니다.
 
 Token2에는
 
-- messageC : Token1의 messageA
+- messageC : Token1의 messageB
 
 - messageD : 획득한 TGS Session Key'로 암호화된 Authenticator (클라이언트 ID가 포함됨)
 
@@ -83,9 +83,9 @@ Token2에는
 
 `client.token3 = try session.tgs.stage4(token2: client.token2)`
 
-TGS는 Token2 안에 있는 messageC를 TGS Secret Key로 복호화해서 TGS 세선키를 획득합니다.
+TGS는 Token2 안에 있는 messageC를 TGS Secret Key로 복호화해서 TGS Session Key를 획득합니다.
 
-또한 messageC를 자신의 TGS Secret Key로 TGT를 복호화해서 클라이언트 ID (1번이라 칭함)를 획득합니다. 또한 messageD에서 자신의 TGS 세선키로 Authenticator를 복호화해서 클라이언트 ID (2번이라 칭함)를 획득합니다.
+또한 messageC를 자신의 TGS Secret Key로 TGT를 복호화해서 클라이언트 ID (1번이라 칭함)를 획득합니다. 또한 messageD에서 자신의 TGS Session Key로 Authenticator를 복호화해서 클라이언트 ID (2번이라 칭함)를 획득합니다.
 
 1번 ID와 2번 ID를 비교해서 일치하지 않을 경우 `TGS_ERROR.ID_IS_NOT_MATCHING` 오류를 출력합니다. 만약 일치하다면 Token3를 생성합니다.
 
@@ -103,7 +103,7 @@ Token3에는
 
 `client.token4 = try client.stage5()`
 
-클라이언트는 4번 과정에서 획득한 TGS 세선키로 Token3의 messageF를 복호화해서 Server Session Key를 획득합니다. 이 키를 통해 Token4를 생성합니다.
+클라이언트는 4번 과정에서 획득한 TGS Session Key로 Token3의 messageF를 복호화해서 Server Session Key를 획득합니다. 이 키를 통해 Token4를 생성합니다.
 
 Token4에는
 
