@@ -117,6 +117,8 @@ Token4에는
 
 7. SS에 Token4를 전송하고 Token5를 요청
 
+`client.token5 = try session.ss.stage6(token4: client.token4)`
+
 Server Session Key로 Token4의 messageG를 복호화해서 클라이언트 ID (4번이라 칭함)를 획득합니다.
 
 SS는 Token4 안에 있는 messageE를 자신의 Server Secret Key로 복호화해서 Server Session Key와 클라이언트 ID (3번이라 칭함)를 획득합니다. 이 Server 3번 ID와 4번 ID를 비교해서 일치하지 않을 경우 `SS_ERROR.ID_IS_NOT_MATCHING` 오류를 출력합니다. 만약 일치하다면 Token5를 생성합니다.
