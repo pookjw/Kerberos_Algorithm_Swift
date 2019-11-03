@@ -11,22 +11,17 @@ import SwiftUI
 struct SettingView: View {
     @EnvironmentObject var enviromentClass: EnviromentClass
     
-    var closeButton: some View{
-        Button(action: {self.enviromentClass.showSettingSheet.toggle()}){
-            Image(systemName: "xmark")
-        }
-    }
-    
     var body: some View {
-        NavigationView{
-            List{
-                NavigationLink(destination: ClientView()){
-                    Text("d")
-                }
+        List{
+            NavigationLink(destination: ClientView()){
+                Text("Client List")
             }
-            .navigationBarTitle("Kerberos Settings", displayMode: .inline)
-            .navigationBarItems(trailing: closeButton)
+            NavigationLink(destination: ServerView()){
+                Text("Server List")
+            }
         }
+        .navigationBarTitle("Kerberos Settings", displayMode: .inline)
+        
     }
 }
 

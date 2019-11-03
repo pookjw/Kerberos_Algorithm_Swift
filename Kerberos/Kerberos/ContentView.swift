@@ -11,25 +11,19 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var enviromentClass: EnviromentClass
     
-    var openSheetButton: some View{
-        Button(action: {self.enviromentClass.showSettingSheet.toggle()}){
-            Image(systemName: "gear")
-        }
-    }
-    
     var body: some View {
         NavigationView{
-            Button(action: {runKerberos(servers: &session_1, client: &client_1)}){
-                Text("Run")
+            VStack{
+                Button(action: {runKerberos(servers: self.enviromentClass.server_list[self.enviromentClass.selected_server]!, client: self.enviromentClass.client_list[self.enviromentClass.selected_client]!)}){
+                    Text("Run")
+                        .fontWeight(.heavy)
+                        .font(.system(size: 40))
+                }
+                NavigationLink(destination: SettingView()){
+                    Image(systemName: "gear")
+                }
             }
                 .navigationBarTitle("Kerberos")
-                .navigationBarItems(trailing: HStack{
-                    openSheetButton
-                })
-                .sheet(isPresented: $enviromentClass.showSettingSheet){
-                    SettingView()
-                        .environmentObject(self.enviromentClass)
-                }
         }
     }
 }

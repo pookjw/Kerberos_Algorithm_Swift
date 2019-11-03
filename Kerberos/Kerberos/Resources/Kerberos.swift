@@ -15,7 +15,6 @@ protocol Server: AnyObject{
 }
 
 class Client{
-    let client_id_raw: String
     let client_id: [UInt8]
     let client_key: [UInt8]
     let client_iv: [UInt8]
@@ -28,21 +27,21 @@ class Client{
     var tgs_session_iv: [UInt8] = []
     var server_session_key: [UInt8] = []
     var server_session_iv: [UInt8] = []
+    var success = false
     enum CLIENT_ERROR: Error{
         case TOKEN1_IS_NIL
         case TOKEN3_IS_NIL
         case TOKEN5_IS_NIL
         case INVALID_TIMESTAMP
     }
-    init(client_id_raw: String, client_key: [UInt8], client_iv: [UInt8], session: inout Session){
-        self.client_id_raw = client_id_raw
-        self.client_id = client_id_raw.toArrayUInt8
+    init(client_id: [UInt8], client_key: [UInt8], client_iv: [UInt8], session: Session){
+        self.client_id = client_id
         self.client_key = client_key
         self.client_iv = client_iv
         
-        session.`as`.client_id = self.client_id
-        session.`as`.client_key = self.client_key
-        session.`as`.client_iv = self.client_iv
+        session.as.client_id_list.append(client_id)
+        session.as.client_key_list[client_id] = client_key
+        session.as.client_iv_list[client_id] = client_iv
     }
     func stage3() throws -> Token2{
         if token1 == nil{
@@ -83,26 +82,27 @@ class Client{
         if timestamp != token5?.timestamp{
             throw CLIENT_ERROR.INVALID_TIMESTAMP
         }
+        self.success = true
     }
 }
 
 class AS{
-    var client_id: [UInt8]?
-    var client_key: [UInt8]?
-    var client_iv: [UInt8]?
+    var client_id_list: [[UInt8]] = []
+    var client_key_list: [[UInt8]: [UInt8]] = [:]
+    var client_iv_list: [[UInt8]: [UInt8]] = [:]
     enum AS_ERROR: Error{
-        case ID_IS_NOT_MATCHING
+        case ID_IS_NOT_SIGNED
     }
     weak var tgs_delegate: Server?
     func stage2(client_id: [UInt8]) throws -> Token1{
-        if self.client_id != client_id{
-            throw AS_ERROR.ID_IS_NOT_MATCHING
+        if !self.client_id_list.contains(client_id){
+            throw AS_ERROR.ID_IS_NOT_SIGNED
         }
         var result = Token1()
         let tgs_session_key = randomArray()
         let tgs_session_iv = randomArray()
-        result.encrypted_tgs_session_key_with_client = try tgs_session_key.encrypt(key: client_key!, iv: client_iv!)
-        result.encrypted_tgs_seesion_iv_with_client = try tgs_session_iv.encrypt(key: client_key!, iv: client_iv!)
+        result.encrypted_tgs_session_key_with_client = try tgs_session_key.encrypt(key: client_key_list[client_id]!, iv: client_iv_list[client_id]!)
+        result.encrypted_tgs_seesion_iv_with_client = try tgs_session_iv.encrypt(key: client_key_list[client_id]!, iv: client_iv_list[client_id]!)
         result.encrypted_client_id_wuth_tgs_secret = try client_id.encrypt(key: tgs_delegate!.secret_key, iv: tgs_delegate!.secret_iv)
         result.encrypted_tgs_seesion_key_with_tgs_secret = try tgs_session_key.encrypt(key: tgs_delegate!.secret_key, iv: tgs_delegate!.secret_iv)
         result.encrypted_tgs_seesion_iv_with_tgs_secret =  try tgs_session_iv.encrypt(key: tgs_delegate!.secret_key, iv: tgs_delegate!.secret_iv)
@@ -249,6 +249,12 @@ func timestamp() -> [UInt8]{
 extension String{
     var toArrayUInt8: [UInt8]{
         Array<UInt8>(self.utf8)
+    }
+}
+
+extension Array where Element == UInt8 {
+    var toString: String{
+        String(bytes: self, encoding: .utf8)!
     }
 }
 

@@ -21,6 +21,7 @@
 		F32A12B3236EA99D00B79507 /* Kerberos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A12B2236EA99D00B79507 /* Kerberos.swift */; };
 		F32A12B7236EA9B500B79507 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A12B5236EA9B500B79507 /* SettingView.swift */; };
 		F32A12BC236EAAB000B79507 /* ClientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A12BB236EAAB000B79507 /* ClientView.swift */; };
+		F32A12D3236EC4B400B79507 /* ServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A12D2236EC4B400B79507 /* ServerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		F32A12B2236EA99D00B79507 /* Kerberos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kerberos.swift; sourceTree = "<group>"; };
 		F32A12B5236EA9B500B79507 /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		F32A12BB236EAAB000B79507 /* ClientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientView.swift; sourceTree = "<group>"; };
+		F32A12D2236EC4B400B79507 /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 			children = (
 				F32A12B5236EA9B500B79507 /* SettingView.swift */,
 				F32A12BB236EAAB000B79507 /* ClientView.swift */,
+				F32A12D2236EC4B400B79507 /* ServerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				F32A12B3236EA99D00B79507 /* Kerberos.swift in Sources */,
 				F32A125D236E9CB300B79507 /* SceneDelegate.swift in Sources */,
 				F32A12B7236EA9B500B79507 /* SettingView.swift in Sources */,
+				F32A12D3236EC4B400B79507 /* ServerView.swift in Sources */,
 				F32A125F236E9CB300B79507 /* ContentView.swift in Sources */,
 				F32A12B0236EA98600B79507 /* Data.swift in Sources */,
 			);
