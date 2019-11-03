@@ -1,0 +1,675 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F32A125B236E9CB300B79507 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A125A236E9CB300B79507 /* AppDelegate.swift */; };
+		F32A125D236E9CB300B79507 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A125C236E9CB300B79507 /* SceneDelegate.swift */; };
+		F32A125F236E9CB300B79507 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A125E236E9CB300B79507 /* ContentView.swift */; };
+		F32A1261236E9CB500B79507 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F32A1260236E9CB500B79507 /* Assets.xcassets */; };
+		F32A1264236E9CB500B79507 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F32A1263236E9CB500B79507 /* Preview Assets.xcassets */; };
+		F32A1267236E9CB500B79507 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F32A1265236E9CB500B79507 /* LaunchScreen.storyboard */; };
+		F32A1272236E9CB500B79507 /* KerberosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A1271236E9CB500B79507 /* KerberosTests.swift */; };
+		F32A127D236E9CB500B79507 /* KerberosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A127C236E9CB500B79507 /* KerberosUITests.swift */; };
+		F32A12A8236E9D7E00B79507 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F32A12A7236E9D7E00B79507 /* CryptoSwift.framework */; };
+		F32A12A9236E9D7E00B79507 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F32A12A7236E9D7E00B79507 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F32A12B0236EA98600B79507 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A12AF236EA98600B79507 /* Data.swift */; };
+		F32A12B3236EA99D00B79507 /* Kerberos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A12B2236EA99D00B79507 /* Kerberos.swift */; };
+		F32A12B7236EA9B500B79507 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A12B5236EA9B500B79507 /* SettingView.swift */; };
+		F32A12BC236EAAB000B79507 /* ClientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A12BB236EAAB000B79507 /* ClientView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F32A126E236E9CB500B79507 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F32A124F236E9CB300B79507 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F32A1256236E9CB300B79507;
+			remoteInfo = Kerberos;
+		};
+		F32A1279236E9CB500B79507 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F32A124F236E9CB300B79507 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F32A1256236E9CB300B79507;
+			remoteInfo = Kerberos;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F32A12A6236E9D6A00B79507 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F32A12A9236E9D7E00B79507 /* CryptoSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F32A1257236E9CB300B79507 /* Kerberos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kerberos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F32A125A236E9CB300B79507 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F32A125C236E9CB300B79507 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F32A125E236E9CB300B79507 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F32A1260236E9CB500B79507 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F32A1263236E9CB500B79507 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F32A1266236E9CB500B79507 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F32A1268236E9CB500B79507 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F32A126D236E9CB500B79507 /* KerberosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KerberosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F32A1271236E9CB500B79507 /* KerberosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KerberosTests.swift; sourceTree = "<group>"; };
+		F32A1273236E9CB500B79507 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F32A1278236E9CB500B79507 /* KerberosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KerberosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F32A127C236E9CB500B79507 /* KerberosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KerberosUITests.swift; sourceTree = "<group>"; };
+		F32A127E236E9CB600B79507 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F32A12A2236E9D6400B79507 /* Kerberos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kerberos.entitlements; sourceTree = "<group>"; };
+		F32A12A7236E9D7E00B79507 /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F32A12AF236EA98600B79507 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		F32A12B2236EA99D00B79507 /* Kerberos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kerberos.swift; sourceTree = "<group>"; };
+		F32A12B5236EA9B500B79507 /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		F32A12BB236EAAB000B79507 /* ClientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F32A1254236E9CB300B79507 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F32A12A8236E9D7E00B79507 /* CryptoSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F32A126A236E9CB500B79507 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F32A1275236E9CB500B79507 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F32A124E236E9CB300B79507 = {
+			isa = PBXGroup;
+			children = (
+				F32A1259236E9CB300B79507 /* Kerberos */,
+				F32A1270236E9CB500B79507 /* KerberosTests */,
+				F32A127B236E9CB500B79507 /* KerberosUITests */,
+				F32A1258236E9CB300B79507 /* Products */,
+				F32A12A3236E9D6A00B79507 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F32A1258236E9CB300B79507 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F32A1257236E9CB300B79507 /* Kerberos.app */,
+				F32A126D236E9CB500B79507 /* KerberosTests.xctest */,
+				F32A1278236E9CB500B79507 /* KerberosUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F32A1259236E9CB300B79507 /* Kerberos */ = {
+			isa = PBXGroup;
+			children = (
+				F32A12B4236EA9A400B79507 /* Views */,
+				F32A12B1236EA98E00B79507 /* Resources */,
+				F32A12AE236EA97600B79507 /* Data */,
+				F32A12A2236E9D6400B79507 /* Kerberos.entitlements */,
+				F32A125A236E9CB300B79507 /* AppDelegate.swift */,
+				F32A125C236E9CB300B79507 /* SceneDelegate.swift */,
+				F32A125E236E9CB300B79507 /* ContentView.swift */,
+				F32A1260236E9CB500B79507 /* Assets.xcassets */,
+				F32A1265236E9CB500B79507 /* LaunchScreen.storyboard */,
+				F32A1268236E9CB500B79507 /* Info.plist */,
+				F32A1262236E9CB500B79507 /* Preview Content */,
+			);
+			path = Kerberos;
+			sourceTree = "<group>";
+		};
+		F32A1262236E9CB500B79507 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F32A1263236E9CB500B79507 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F32A1270236E9CB500B79507 /* KerberosTests */ = {
+			isa = PBXGroup;
+			children = (
+				F32A1271236E9CB500B79507 /* KerberosTests.swift */,
+				F32A1273236E9CB500B79507 /* Info.plist */,
+			);
+			path = KerberosTests;
+			sourceTree = "<group>";
+		};
+		F32A127B236E9CB500B79507 /* KerberosUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F32A127C236E9CB500B79507 /* KerberosUITests.swift */,
+				F32A127E236E9CB600B79507 /* Info.plist */,
+			);
+			path = KerberosUITests;
+			sourceTree = "<group>";
+		};
+		F32A12A3236E9D6A00B79507 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F32A12A7236E9D7E00B79507 /* CryptoSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F32A12AE236EA97600B79507 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F32A12AF236EA98600B79507 /* Data.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		F32A12B1236EA98E00B79507 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F32A12B2236EA99D00B79507 /* Kerberos.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F32A12B4236EA9A400B79507 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F32A12B5236EA9B500B79507 /* SettingView.swift */,
+				F32A12BB236EAAB000B79507 /* ClientView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F32A1256236E9CB300B79507 /* Kerberos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F32A1281236E9CB600B79507 /* Build configuration list for PBXNativeTarget "Kerberos" */;
+			buildPhases = (
+				F32A1253236E9CB300B79507 /* Sources */,
+				F32A1254236E9CB300B79507 /* Frameworks */,
+				F32A1255236E9CB300B79507 /* Resources */,
+				F32A12A6236E9D6A00B79507 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kerberos;
+			productName = Kerberos;
+			productReference = F32A1257236E9CB300B79507 /* Kerberos.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F32A126C236E9CB500B79507 /* KerberosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F32A1284236E9CB600B79507 /* Build configuration list for PBXNativeTarget "KerberosTests" */;
+			buildPhases = (
+				F32A1269236E9CB500B79507 /* Sources */,
+				F32A126A236E9CB500B79507 /* Frameworks */,
+				F32A126B236E9CB500B79507 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F32A126F236E9CB500B79507 /* PBXTargetDependency */,
+			);
+			name = KerberosTests;
+			productName = KerberosTests;
+			productReference = F32A126D236E9CB500B79507 /* KerberosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F32A1277236E9CB500B79507 /* KerberosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F32A1287236E9CB600B79507 /* Build configuration list for PBXNativeTarget "KerberosUITests" */;
+			buildPhases = (
+				F32A1274236E9CB500B79507 /* Sources */,
+				F32A1275236E9CB500B79507 /* Frameworks */,
+				F32A1276236E9CB500B79507 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F32A127A236E9CB500B79507 /* PBXTargetDependency */,
+			);
+			name = KerberosUITests;
+			productName = KerberosUITests;
+			productReference = F32A1278236E9CB500B79507 /* KerberosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F32A124F236E9CB300B79507 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1120;
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = pookjw;
+				TargetAttributes = {
+					F32A1256236E9CB300B79507 = {
+						CreatedOnToolsVersion = 11.2;
+					};
+					F32A126C236E9CB500B79507 = {
+						CreatedOnToolsVersion = 11.2;
+						TestTargetID = F32A1256236E9CB300B79507;
+					};
+					F32A1277236E9CB500B79507 = {
+						CreatedOnToolsVersion = 11.2;
+						TestTargetID = F32A1256236E9CB300B79507;
+					};
+				};
+			};
+			buildConfigurationList = F32A1252236E9CB300B79507 /* Build configuration list for PBXProject "Kerberos" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F32A124E236E9CB300B79507;
+			productRefGroup = F32A1258236E9CB300B79507 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F32A1256236E9CB300B79507 /* Kerberos */,
+				F32A126C236E9CB500B79507 /* KerberosTests */,
+				F32A1277236E9CB500B79507 /* KerberosUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F32A1255236E9CB300B79507 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F32A1267236E9CB500B79507 /* LaunchScreen.storyboard in Resources */,
+				F32A1264236E9CB500B79507 /* Preview Assets.xcassets in Resources */,
+				F32A1261236E9CB500B79507 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F32A126B236E9CB500B79507 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F32A1276236E9CB500B79507 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F32A1253236E9CB300B79507 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F32A12BC236EAAB000B79507 /* ClientView.swift in Sources */,
+				F32A125B236E9CB300B79507 /* AppDelegate.swift in Sources */,
+				F32A12B3236EA99D00B79507 /* Kerberos.swift in Sources */,
+				F32A125D236E9CB300B79507 /* SceneDelegate.swift in Sources */,
+				F32A12B7236EA9B500B79507 /* SettingView.swift in Sources */,
+				F32A125F236E9CB300B79507 /* ContentView.swift in Sources */,
+				F32A12B0236EA98600B79507 /* Data.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F32A1269236E9CB500B79507 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F32A1272236E9CB500B79507 /* KerberosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F32A1274236E9CB500B79507 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F32A127D236E9CB500B79507 /* KerberosUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F32A126F236E9CB500B79507 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F32A1256236E9CB300B79507 /* Kerberos */;
+			targetProxy = F32A126E236E9CB500B79507 /* PBXContainerItemProxy */;
+		};
+		F32A127A236E9CB500B79507 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F32A1256236E9CB300B79507 /* Kerberos */;
+			targetProxy = F32A1279236E9CB500B79507 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F32A1265236E9CB500B79507 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F32A1266236E9CB500B79507 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F32A127F236E9CB600B79507 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F32A1280236E9CB600B79507 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F32A1282236E9CB600B79507 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Kerberos/Kerberos.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Kerberos/Preview Content\"";
+				DEVELOPMENT_TEAM = P53D29U9LJ;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Kerberos/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.Kerberos;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F32A1283236E9CB600B79507 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Kerberos/Kerberos.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Kerberos/Preview Content\"";
+				DEVELOPMENT_TEAM = P53D29U9LJ;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Kerberos/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.Kerberos;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F32A1285236E9CB600B79507 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P53D29U9LJ;
+				INFOPLIST_FILE = KerberosTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.KerberosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kerberos.app/Kerberos";
+			};
+			name = Debug;
+		};
+		F32A1286236E9CB600B79507 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P53D29U9LJ;
+				INFOPLIST_FILE = KerberosTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.KerberosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kerberos.app/Kerberos";
+			};
+			name = Release;
+		};
+		F32A1288236E9CB600B79507 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P53D29U9LJ;
+				INFOPLIST_FILE = KerberosUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.KerberosUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Kerberos;
+			};
+			name = Debug;
+		};
+		F32A1289236E9CB600B79507 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P53D29U9LJ;
+				INFOPLIST_FILE = KerberosUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pookjw.KerberosUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Kerberos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F32A1252236E9CB300B79507 /* Build configuration list for PBXProject "Kerberos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F32A127F236E9CB600B79507 /* Debug */,
+				F32A1280236E9CB600B79507 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F32A1281236E9CB600B79507 /* Build configuration list for PBXNativeTarget "Kerberos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F32A1282236E9CB600B79507 /* Debug */,
+				F32A1283236E9CB600B79507 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F32A1284236E9CB600B79507 /* Build configuration list for PBXNativeTarget "KerberosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F32A1285236E9CB600B79507 /* Debug */,
+				F32A1286236E9CB600B79507 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F32A1287236E9CB600B79507 /* Build configuration list for PBXNativeTarget "KerberosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F32A1288236E9CB600B79507 /* Debug */,
+				F32A1289236E9CB600B79507 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F32A124F236E9CB300B79507 /* Project object */;
+}

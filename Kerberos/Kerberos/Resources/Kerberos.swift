@@ -1,9 +1,9 @@
 //
-//  File.swift
+//  Kerberos.swift
 //  Kerberos
 //
-//  Created by pook on 10/6/19.
-//  Copyright © 2019 pook. All rights reserved.
+//  Created by pook on 11/3/19.
+//  Copyright © 2019 pookjw. All rights reserved.
 //
 
 import Foundation
@@ -15,6 +15,7 @@ protocol Server: AnyObject{
 }
 
 class Client{
+    let client_id_raw: String
     let client_id: [UInt8]
     let client_key: [UInt8]
     let client_iv: [UInt8]
@@ -33,8 +34,9 @@ class Client{
         case TOKEN5_IS_NIL
         case INVALID_TIMESTAMP
     }
-    init(client_id: [UInt8], client_key: [UInt8], client_iv: [UInt8], session: inout Session){
-        self.client_id = client_id
+    init(client_id_raw: String, client_key: [UInt8], client_iv: [UInt8], session: inout Session){
+        self.client_id_raw = client_id_raw
+        self.client_id = client_id_raw.toArrayUInt8
         self.client_key = client_key
         self.client_iv = client_iv
         
@@ -234,6 +236,10 @@ func randomString() -> String {
 
 func randomArray() -> [UInt8]{
     return Array<UInt8>(randomString().utf8)
+}
+
+func randomArray(input: String) -> [UInt8]{
+    return Array<UInt8>(input.utf8)
 }
 
 func timestamp() -> [UInt8]{

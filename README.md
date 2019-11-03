@@ -1,4 +1,6 @@
-# Kerberos_Modeling_Swift
+# Kerberos_Algorithm_Swift
+
+![1](https://live.staticflickr.com/65535/49004869416_e55e40abd9_o.png)
 
 Not a real Kerberos. It doesn't communicate with servers. Just commutes with Swift-class with Kerberos algorithm.
 
@@ -6,7 +8,11 @@ Used AES-128 with [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/C
 
 한국어 (Korean) : [explanation_kor.md](explanation_kor/explanation_kor.md)
 
-## How it works
+**This project is still in progress**
+
+## Fundamental Algorithm
+
+More Details can check from [Kerberos (protocol)](https://en.wikipedia.org/wiki/Kerberos_(protocol))
 
 1. Client sends ID to AS
 
@@ -50,6 +56,16 @@ This is called on Token5.
 
 7. Client gets messageH and check timestamp.
 
-## Reference
+## Todo
 
-[Kerberos (protocol)](https://en.wikipedia.org/wiki/Kerberos_(protocol))
+- Multi clients and sessions
+
+- Add Kerberos fundamental vulnerability
+
+- Enhance timestamp
+
+- Add LogView
+
+- More error handling
+
+- Multi Encryption Algorithm
