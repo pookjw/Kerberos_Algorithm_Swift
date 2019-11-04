@@ -1,6 +1,6 @@
 # Kerberos_Algorithm_Swift
 
-![1](https://live.staticflickr.com/65535/49004869416_e55e40abd9_o.png)
+![1](https://live.staticflickr.com/65535/49011461207_10dbbd00a3_o.png)
 
 Not a real Kerberos. It doesn't communicate with servers. Just commutes with Swift-class with Kerberos algorithm.
 
