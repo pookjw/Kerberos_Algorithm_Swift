@@ -14,7 +14,7 @@ Used AES-128 with [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/C
 
 More Details can check from [Kerberos (protocol)](https://en.wikipedia.org/wiki/Kerberos_(protocol))
 
-1. Client sends ID to AS
+1. Client sends ID to AS. AS checks that Client is signed up.
 
 2. AS gives:
 
@@ -56,7 +56,53 @@ This is called on Token5.
 
 7. Client gets messageH and check timestamp.
 
-## Todo
+## How to use this
+
+- Creating new Client
+
+Go to **Settings (gear icon) → Client List → Plus Button (located on right top)**
+
+![3](https://live.staticflickr.com/65535/49011271766_9c7f29dcff_o.png)
+
+- Creating new Server
+
+Go to **Settings (gear icon) → Server List → Plus Button (located on right top)**
+
+![2](https://live.staticflickr.com/65535/49011267841_df941b6246_o.png)
+
+- Signing up Client to Server
+
+Go to **Settings (gear icon) → Server List → Pencil Button (located on right top) → Select Server you want to sign up → Add item...  → Select Client you want to sign up**
+
+![3](https://live.staticflickr.com/65535/49011277536_720504b922_o.png)
+
+- Select Client and Server to run algorithm
+
+Select Client: Go to **Settings (gear icon) → Client List →  Touch Client you want to select**
+
+Select Server: Go to **Settings (gear icon) → Server List →  Touch Server you want to select**
+
+- Running Algorithm
+
+![1](https://live.staticflickr.com/65535/49011461207_10dbbd00a3_o.png)
+
+Touch **Run** button. If running algorithm was successful, you can see this message:
+
+```
+Requesting token1 to Authentication Server...
+Creating token2...
+Requesting token3 to Ticket Granting Service...
+Creating token4...
+Requesting token5 to Service Server...
+Checking token5...
+Success!
+```
+
+**Make sure that selected Client is signed up to selected Server!!! If it didn't you will see AS.AS_ERROR.**
+
+## To Do
+
+- Fix SwiftUI EnviromentObject refresh bug
 
 - Add Kerberos fundamental vulnerability
 
