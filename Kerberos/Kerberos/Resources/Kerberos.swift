@@ -9,6 +9,26 @@
 import Foundation
 import CryptoSwift
 
+func runKerberos(servers: Session, client: Client){
+    do{
+        print("Requesting token1 to Authentication Server...")
+        client.token1 = try servers.as.stage2(client_id: client.client_id)
+        print("Creating token2...")
+        client.token2 = try client.stage3()
+        print("Requesting token3 to Ticket Granting Service...")
+        client.token3 = try servers.tgs.stage4(token2: client.token2)
+        print("Creating token4...")
+        client.token4 = try client.stage5()
+        print("Requesting token5 to Service Server...")
+        client.token5 = try servers.ss.stage6(token4: client.token4)
+        print("Checking token5...")
+        try client.stage7()
+        print("Success!")
+    }catch let error as NSError {
+        print("\(error)")
+    }
+}
+
 protocol Server: AnyObject{
     var secret_key: [UInt8]{get}
     var secret_iv: [UInt8]{get}
@@ -34,14 +54,10 @@ class Client{
         case TOKEN5_IS_NIL
         case INVALID_TIMESTAMP
     }
-    init(client_id: [UInt8], client_key: [UInt8], client_iv: [UInt8], session: Session){
+    init(client_id: [UInt8], client_key: [UInt8], client_iv: [UInt8]){
         self.client_id = client_id
         self.client_key = client_key
         self.client_iv = client_iv
-        
-        session.as.client_id_list.append(client_id)
-        session.as.client_key_list[client_id] = client_key
-        session.as.client_iv_list[client_id] = client_iv
     }
     func stage3() throws -> Token2{
         if token1 == nil{
@@ -94,6 +110,13 @@ class AS{
         case ID_IS_NOT_SIGNED
     }
     weak var tgs_delegate: Server?
+    func signUp(client: Client){
+        if !self.client_id_list.contains(client.client_id){
+            self.client_id_list.append(client.client_id)
+            self.client_key_list[client.client_id] = client.client_key
+            self.client_iv_list[client.client_id] = client.client_iv
+        }
+    }
     func stage2(client_id: [UInt8]) throws -> Token1{
         if !self.client_id_list.contains(client_id){
             throw AS_ERROR.ID_IS_NOT_SIGNED

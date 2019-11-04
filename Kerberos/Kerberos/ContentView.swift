@@ -14,13 +14,16 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             VStack{
-                Button(action: {runKerberos(servers: self.enviromentClass.server_list[self.enviromentClass.selected_server]!, client: self.enviromentClass.client_list[self.enviromentClass.selected_client]!)}){
+                Button(action: {runKerberos(servers: self.enviromentClass.server_list[self.enviromentClass.selected_server], client: self.enviromentClass.client_list[self.enviromentClass.selected_client])}){
                     Text("Run")
                         .fontWeight(.heavy)
                         .font(.system(size: 40))
                 }
+                Spacer()
+                    .frame(height: 60)
                 NavigationLink(destination: SettingView()){
                     Image(systemName: "gear")
+                        .scaleEffect(2.5)
                 }
             }
                 .navigationBarTitle("Kerberos")

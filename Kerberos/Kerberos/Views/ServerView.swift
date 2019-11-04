@@ -11,15 +11,21 @@ import SwiftUI
 struct ServerView: View {
     @EnvironmentObject var enviromentClass: EnviromentClass
     
-    var sheetToggle: some View{
-        Button(action: {self.enviromentClass.showSheet.toggle()}){
-            Text("Show Data")
+    var navtigationBarButton: some View{
+        HStack{
+            Button(action: {self.enviromentClass.showSheet.toggle()}){
+                Image(systemName: "pencil")
+            }
+            Button(action: {self.enviromentClass.add_server()}){
+                Image(systemName: "plus")
+            }
         }
+            .scaleEffect(1.5)
     }
     
     var body: some View {
         List{
-            ForEach(self.enviromentClass.server_list.keys.sorted(), id: \.self){ value in
+            ForEach(0..<self.enviromentClass.server_list.count, id: \.self){ value in
                 HStack{
                     Button(action: {self.enviromentClass.selected_server = value}){
                         if self.enviromentClass.selected_server == value{
@@ -36,16 +42,16 @@ struct ServerView: View {
             }
         }
         .navigationBarTitle(Text("Server"))
-        .navigationBarItems(trailing: sheetToggle)
+        .navigationBarItems(trailing: navtigationBarButton)
         .sheet(isPresented: $enviromentClass.showSheet){
-            SignedClientView()
+            EditView()
                 .environmentObject(self.enviromentClass)
         }
     }
 }
 
 
-struct SignedClientView: View{
+struct EditView: View{
     @EnvironmentObject var enviromentClass: EnviromentClass
     var server_number: Int = 0
     
@@ -58,24 +64,61 @@ struct SignedClientView: View{
     var body: some View{
         NavigationView{
             List{
-                ForEach(self.enviromentClass.server_list.keys.sorted(), id: \.self){ value in
-                    VStack(alignment: .leading){
-                        HStack{
-                            Text(String(value))
-                                .fontWeight(.heavy)
-                                .font(.system(size: 40))
-                            Spacer()
-                            Image(systemName: "plus")
-                        }
-                        ForEach(self.enviromentClass.server_list[value]!.as.client_id_list, id: \.self){ new_value in
-                            Text(new_value.toString)
+                ForEach(0..<self.enviromentClass.server_list.count, id: \.self){ value in
+                    NavigationLink(destination: SignedClientView(server_number: value)){
+                        Text("Server \(value)")
+                    }
+                }
+            }
+            .navigationBarTitle(Text("Edit Client Server"))
+            .navigationBarItems(trailing: sheetToggle)
+        }
+    }
+}
+
+struct SignedClientView: View{
+    @EnvironmentObject var enviromentClass: EnviromentClass
+    var server_number: Int
+    var body: some View{
+        List{
+            ForEach(0..<self.enviromentClass.server_list[server_number].as.client_id_list.count, id: \.self){ value in
+                Text(self.enviromentClass.server_list[self.server_number].as.client_id_list[value].toString)
+            }
+            NavigationLink(destination: ClientListView(server_number: server_number)){
+                Image(systemName: "plus.circle.fill")
+                    .foregroundColor(Color.green)
+                Text("Add item...")
+                Spacer()
+            }
+        }
+        .navigationBarTitle(Text("\(server_number)"), displayMode: .inline)
+    }
+}
+
+struct ClientListView: View{
+    @EnvironmentObject var enviromentClass: EnviromentClass
+    var server_number: Int
+    var body: some View{
+        List{
+            ForEach(0..<self.enviromentClass.client_list.count, id: \.self){ value in
+                Button(action: {
+                    self.enviromentClass.server_list[self.server_number].as.signUp(client: self.enviromentClass.client_list[value])
+                }){
+                    HStack{
+                        if self.enviromentClass.server_list[self.server_number].as.client_id_list.contains(self.enviromentClass.client_list[value].client_id){
+                        Text(self.enviromentClass.client_list[value].client_id.toString)
+                            .foregroundColor(Color.gray)
+                        Spacer()
+                        Text("Signed")
+                            .foregroundColor(Color.gray)
+                        }else{
+                            Text(self.enviromentClass.client_list[value].client_id.toString)
                         }
                     }
                 }
             }
-            .navigationBarTitle(Text("Signed Client"))
-            .navigationBarItems(trailing: sheetToggle)
         }
+        .navigationBarTitle(Text("Add Client"))
     }
 }
 

@@ -14,24 +14,28 @@ struct ClientView: View {
         Button(action: {self.enviromentClass.add_client()}){
             Image(systemName: "plus")
         }
+            .scaleEffect(1.5)
     }
     
     var body: some View {
         List{
-            ForEach(self.enviromentClass.client_list.keys.sorted(), id: \.self){ value in
+            ForEach(0..<self.enviromentClass.client_list.count, id: \.self){ value in
                 HStack{
                     Button(action: {self.enviromentClass.selected_client = value}){
                         if self.enviromentClass.selected_client == value{
                             Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(Color.blue)
+                                .foregroundColor(Color.blue)
                         }else{
                             Image(systemName: "circle")
                         }
                     }
-                    Text(self.enviromentClass.client_list[value]!.client_id.toString)
+                    Text(self.enviromentClass.client_list[value].client_id.toString)
                     Spacer()
-                    Text(String(self.enviromentClass.client_list[value]!.success))
-                        .foregroundColor(Color.gray)
+                    if self.enviromentClass.client_list[value].success{
+                        Image(systemName: "lock.open.fill")
+                    }else{
+                        Image(systemName: "lock.fill")
+                    }
                 }
             }
         }

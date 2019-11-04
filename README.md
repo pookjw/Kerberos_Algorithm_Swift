@@ -58,8 +58,6 @@ This is called on Token5.
 
 ## Todo
 
-- Multi clients and sessions
-
 - Add Kerberos fundamental vulnerability
 
 - Enhance timestamp
