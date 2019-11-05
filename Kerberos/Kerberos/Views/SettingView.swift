@@ -32,6 +32,14 @@ struct SettingView: View {
                 NavigationLink(destination: ServerView()){
                     Text("Server List")
                 }
+                Button(action: {self.enviromentClass.log = EnviromentClass.defaultLog}){
+                    Text("Clear Log")
+                        .foregroundColor(Color.red)
+                }
+                Button(action: {self.enviromentClass.logoutAllSessions()}){
+                    Text("Logout All Sessions")
+                        .foregroundColor(Color.red)
+                }
             }
             .navigationBarTitle("Settings")
             .navigationBarItems(trailing: navigationBarButton)

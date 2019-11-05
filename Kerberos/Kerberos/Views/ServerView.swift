@@ -44,7 +44,7 @@ struct ServerView: View {
                 
             }
         }
-        .navigationBarTitle(Text("Server"))
+        .navigationBarTitle(Text("Server"), displayMode: .inline)
         .navigationBarItems(trailing: navtigationBarButton)
         .sheet(isPresented: $enviromentClass.showSheet_2){
             EditView()

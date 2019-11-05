@@ -49,7 +49,7 @@ struct ClientView: View {
                 }
             }
         }
-        .navigationBarTitle(Text("Client"))
+        .navigationBarTitle(Text("Client"), displayMode: .inline)
         .navigationBarItems(trailing: navigationBarButton)
     }
 }
