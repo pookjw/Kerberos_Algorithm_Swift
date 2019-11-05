@@ -16,6 +16,8 @@ struct ClientView: View {
             Button(action: {self.needRefresh.toggle()}){
                 Image(systemName: "arrow.clockwise")
             }
+            Spacer()
+                .frame(width: 25)
             Button(action: {self.enviromentClass.add_client()}){
                 Image(systemName: "plus")
             }

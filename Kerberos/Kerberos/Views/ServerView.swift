@@ -16,6 +16,8 @@ struct ServerView: View {
             Button(action: {self.enviromentClass.showSheet.toggle()}){
                 Image(systemName: "pencil")
             }
+            Spacer()
+                .frame(width: 25)
             Button(action: {self.enviromentClass.add_server()}){
                 Image(systemName: "plus")
             }
