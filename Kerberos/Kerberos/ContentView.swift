@@ -46,11 +46,11 @@ struct ContentView: View {
                 Spacer()
                 LogView()
                 Spacer()
-                    .frame(height: 30)
+                    .frame(height: 20)
                 Text("Selected Client: \(self.enviromentClass.client_list[self.enviromentClass.selected_client].client_id.toString)")
                 Text("Selected Server: \(self.enviromentClass.selected_server)")
                 Spacer()
-                    .frame(height: 30)
+                    .frame(height: 20)
             }
             .padding([.leading, .trailing], 10.0)
             .navigationBarTitle("Kerberos")
