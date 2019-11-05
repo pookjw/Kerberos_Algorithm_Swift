@@ -1,6 +1,6 @@
 # Kerberos_Algorithm_Swift
 
-![1](https://live.staticflickr.com/65535/49016194106_54341209cb_o.png)
+![1](https://live.staticflickr.com/65535/49018208826_a5dabb78e5_o.png)
 
 Not a real Kerberos. It doesn't communicate with actual servers. Just communicates with Swift object with Kerberos algorithm.
 
@@ -55,6 +55,8 @@ This is called on Token5.
 7. Client gets messageH and check timestamp.
 
 ## How to use this
+
+**Outdated Guide**. will update...
 
 - Creating new Client
 

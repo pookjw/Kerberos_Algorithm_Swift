@@ -12,17 +12,30 @@ struct SettingView: View {
     @EnvironmentObject var enviromentClass: EnviromentClass
     @State var needRefresh: Bool = false
     
-    var body: some View {
-        List{
-            NavigationLink(destination: ClientView(needRefresh: self.$needRefresh)){
-                Text("Client List")
-            }
-                .accentColor(self.needRefresh ? .white : .black)
-            NavigationLink(destination: ServerView()){
-                Text("Server List")
+    var navigationBarButton: some View{
+        HStack{
+            Spacer()
+                .frame(width: 50)
+            Button(action: {self.enviromentClass.showSheet_1.toggle()}){
+                Image(systemName: "xmark")
             }
         }
-        .navigationBarTitle("Kerberos Settings", displayMode: .inline)
+    }
+    
+    var body: some View {
+        NavigationView{
+            List{
+                NavigationLink(destination: ClientView(needRefresh: self.$needRefresh)){
+                    Text("Client List")
+                }
+                    .accentColor(self.needRefresh ? .white : .black)
+                NavigationLink(destination: ServerView()){
+                    Text("Server List")
+                }
+            }
+            .navigationBarTitle("Settings")
+            .navigationBarItems(trailing: navigationBarButton)
+        }
         
     }
 }

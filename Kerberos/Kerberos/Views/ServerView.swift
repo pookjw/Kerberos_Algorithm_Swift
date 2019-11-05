@@ -13,12 +13,14 @@ struct ServerView: View {
     
     var navtigationBarButton: some View{
         HStack{
-            Button(action: {self.enviromentClass.showSheet.toggle()}){
+            Button(action: {self.enviromentClass.showSheet_2.toggle()}){
+                Spacer()
+                    .frame(width: 50)
                 Image(systemName: "pencil")
             }
-            Spacer()
-                .frame(width: 25)
             Button(action: {self.enviromentClass.add_server()}){
+                Spacer()
+                    .frame(width: 25)
                 Image(systemName: "plus")
             }
         }
@@ -44,7 +46,7 @@ struct ServerView: View {
         }
         .navigationBarTitle(Text("Server"))
         .navigationBarItems(trailing: navtigationBarButton)
-        .sheet(isPresented: $enviromentClass.showSheet){
+        .sheet(isPresented: $enviromentClass.showSheet_2){
             EditView()
                 .environmentObject(self.enviromentClass)
         }
@@ -57,9 +59,13 @@ struct EditView: View{
     @State var needRefresh: Bool = false
     var server_number: Int = 0
     
-    var sheetToggle: some View{
-        Button(action: {self.enviromentClass.showSheet.toggle()}){
-            Image(systemName: "xmark")
+    var navtigationBarButton: some View{
+        HStack{
+            Button(action: {self.enviromentClass.showSheet_2.toggle()}){
+                Spacer()
+                    .frame(width: 50)
+                Image(systemName: "xmark")
+            }
         }
     }
     
@@ -73,8 +79,8 @@ struct EditView: View{
                 }
             }
             .accentColor(self.needRefresh ? .white : .black)
-            .navigationBarTitle(Text("Edit Client Server"))
-            .navigationBarItems(trailing: sheetToggle)
+            .navigationBarTitle(Text("Edit Server"))
+            .navigationBarItems(trailing: navtigationBarButton)
         }
     }
 }
@@ -87,6 +93,8 @@ struct SignedClientView: View{
     var navigationBarButton: some View{
         HStack{
             Button(action: {self.needRefresh.toggle()}){
+                Spacer()
+                    .frame(width: 50)
                 Image(systemName: "arrow.clockwise")
             }
         }
@@ -117,6 +125,8 @@ struct ClientListView: View{
     var navigationBarButton: some View{
         HStack{
             Button(action: {self.needRefresh.toggle()}){
+                Spacer()
+                    .frame(width: 50)
                 Image(systemName: "arrow.clockwise")
             }
         }

@@ -21,11 +21,11 @@ func runKerberos(servers: Session, client: Client, server_number: Int, log: inou
             "Success!" // 6
         ]
         print(list[number])
-        log += "\n\(list[number])"
+        log += "\n- \(list[number])"
     }
     func add_log(text: String){
         print(text)
-        log += "\n\(text)"
+        log += "\n- \(text)"
     }
     do{
         add_log(0)
@@ -45,7 +45,7 @@ func runKerberos(servers: Session, client: Client, server_number: Int, log: inou
         add_log(text: "Error: Client is not signed to Server!")
     }catch let error as NSError {
         print(error)
-        log += "\n\(error)"
+        log += "\n- \(error)"
     }
 }
 

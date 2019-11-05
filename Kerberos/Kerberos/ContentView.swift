@@ -11,36 +11,54 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var enviromentClass: EnviromentClass
     
-    var body: some View {
-        NavigationView{
-            VStack{
-                Button(action: {runKerberos(
+    var navtigationBarButton: some View{
+        HStack{
+            Button(action: {self.enviromentClass.showSheet_1.toggle()}){
+                Spacer()
+                    .frame(width: 50)
+                Image(systemName: "gear")
+            }
+            Button(action: {
+                self.enviromentClass.log += "\n"
+                self.enviromentClass.log += "\nClient: \(self.enviromentClass.client_list[self.enviromentClass.selected_client].client_id.toString)"
+                self.enviromentClass.log += "\nServer: \(self.enviromentClass.selected_server)"
+                runKerberos(
                     servers: self.enviromentClass.server_list[self.enviromentClass.selected_server],
                     client: self.enviromentClass.client_list[self.enviromentClass.selected_client],
                     server_number: self.enviromentClass.selected_server,
                     log: &self.enviromentClass.log
-                    )}){
-                    Text("Run")
-                        .fontWeight(.heavy)
-                        .font(.system(size: 40))
-                        .foregroundColor(Color.red)
-                }
+                )
+            }
+                )
+            {
                 Spacer()
-                    .frame(height: 40)
-                NavigationLink(destination: SettingView()){
-                    Image(systemName: "gear")
-                        .scaleEffect(2.5)
-                }
+                    .frame(width: 25)
+                Image(systemName: "play.fill")
+                    .foregroundColor(Color.red)
+                    .scaleEffect(1.5)
+            }
+        }
+    }
+    
+    var body: some View {
+        NavigationView{
+            VStack{
                 Spacer()
-                    .frame(height: 40)
+                LogView()
+                Spacer()
+                    .frame(height: 30)
                 Text("Selected Client: \(self.enviromentClass.client_list[self.enviromentClass.selected_client].client_id.toString)")
                 Text("Selected Server: \(self.enviromentClass.selected_server)")
                 Spacer()
                     .frame(height: 30)
-                LogView()
             }
-            .padding([.leading, .bottom, .trailing], 10.0)
-                .navigationBarTitle("Kerberos")
+            .padding([.leading, .trailing], 10.0)
+            .navigationBarTitle("Kerberos")
+            .navigationBarItems(trailing: navtigationBarButton)
+            .sheet(isPresented: $enviromentClass.showSheet_1){
+                SettingView()
+                    .environmentObject(self.enviromentClass)
+            }
         }
     }
 }

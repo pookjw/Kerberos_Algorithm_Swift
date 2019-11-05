@@ -11,14 +11,16 @@ import SwiftUI
 struct ClientView: View {
     @EnvironmentObject var enviromentClass: EnviromentClass
     @Binding var needRefresh: Bool
-    var addButton: some View{
+    var navigationBarButton: some View{
         HStack{
             Button(action: {self.needRefresh.toggle()}){
+                Spacer()
+                    .frame(width: 50)
                 Image(systemName: "arrow.clockwise")
             }
-            Spacer()
-                .frame(width: 25)
             Button(action: {self.enviromentClass.add_client()}){
+                Spacer()
+                    .frame(width: 25)
                 Image(systemName: "plus")
             }
         }
@@ -48,7 +50,7 @@ struct ClientView: View {
             }
         }
         .navigationBarTitle(Text("Client"))
-        .navigationBarItems(trailing: addButton)
+        .navigationBarItems(trailing: navigationBarButton)
     }
 }
 

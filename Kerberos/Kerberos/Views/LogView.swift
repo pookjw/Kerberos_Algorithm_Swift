@@ -17,14 +17,17 @@ struct LogView: View {
             HStack{
                 Spacer()
                     .frame(width: 7)
-                Text(self.enviromentClass.log).multilineTextAlignment(.leading)
+                Text(self.enviromentClass.log)
+                    .foregroundColor(Color.green)
+                    .multilineTextAlignment(.leading)
                 Spacer()
             }
             Spacer()
         }
+            .background(Color.black)
             .overlay(
                 RoundedRectangle(cornerRadius: 6)
-                    .stroke(Color.gray, lineWidth: 4)
+                    .stroke(Color.gray, lineWidth: 6)
             )
     }
 }
