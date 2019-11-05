@@ -14,7 +14,12 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             VStack{
-                Button(action: {self.enviromentClass.log += runKerberos(servers: self.enviromentClass.server_list[self.enviromentClass.selected_server], client: self.enviromentClass.client_list[self.enviromentClass.selected_client], server_number: self.enviromentClass.selected_server)}){
+                Button(action: {runKerberos(
+                    servers: self.enviromentClass.server_list[self.enviromentClass.selected_server],
+                    client: self.enviromentClass.client_list[self.enviromentClass.selected_client],
+                    server_number: self.enviromentClass.selected_server,
+                    log: &self.enviromentClass.log
+                    )}){
                     Text("Run")
                         .fontWeight(.heavy)
                         .font(.system(size: 40))

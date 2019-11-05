@@ -9,26 +9,44 @@
 import Foundation
 import CryptoSwift
 
-func runKerberos(servers: Session, client: Client, server_number: Int) -> String{
-    var result = ""
-    do{
-        result += "\nRequesting token1 to Authentication Server..."
-        client.token1 = try servers.as.stage2(client_id: client.client_id)
-        result += "\nCreating token2..."
-        client.token2 = try client.stage3()
-        result += "\nRequesting token3 to Ticket Granting Service..."
-        client.token3 = try servers.tgs.stage4(token2: client.token2)
-        result += "\nCreating token4..."
-        client.token4 = try client.stage5()
-        result += "\nRequesting token5 to Service Server..."
-        client.token5 = try servers.ss.stage6(token4: client.token4)
-        result += "\nChecking token5..."
-        try client.stage7(server_number: server_number)
-        result += "\nSuccess!"
-    }catch let error as NSError {
-        result += "\n\(error)"
+func runKerberos(servers: Session, client: Client, server_number: Int, log: inout String){
+    func add_log(_ number: Int){
+        let list = [
+            "Requesting token1 to Authentication Server...", // 0
+            "Creating token2...", // 1
+            "Requesting token3 to Ticket Granting Service...", // 2
+            "Creating token4...", // 3
+            "Requesting token5 to Service Server...", // 4
+            "Checking token5...", // 5
+            "Success!" // 6
+        ]
+        print(list[number])
+        log += "\n\(list[number])"
     }
-    return result
+    func add_log(text: String){
+        print(text)
+        log += "\n\(text)"
+    }
+    do{
+        add_log(0)
+        client.token1 = try servers.as.stage2(client_id: client.client_id)
+        add_log(1)
+        client.token2 = try client.stage3()
+        add_log(2)
+        client.token3 = try servers.tgs.stage4(token2: client.token2)
+        add_log(3)
+        client.token4 = try client.stage5()
+        add_log(4)
+        client.token5 = try servers.ss.stage6(token4: client.token4)
+        add_log(5)
+        try client.stage7(server_number: server_number)
+        add_log(6)
+    }catch AS.AS_ERROR.ID_IS_NOT_SIGNED{
+        add_log(text: "Error: Client is not signed to Server!")
+    }catch let error as NSError {
+        print(error)
+        log += "\n\(error)"
+    }
 }
 
 protocol Server: AnyObject{
