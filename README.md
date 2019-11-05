@@ -82,7 +82,7 @@ Select Server: Go to **Settings (gear icon) → Server List →  Touch Server yo
 
 - Running Algorithm
 
-![1](https://live.staticflickr.com/65535/49011461207_10dbbd00a3_o.png)
+![1](https://live.staticflickr.com/65535/49016194106_54341209cb_o.png)
 
 Touch **Run** button. If running algorithm was successful, you can see this message:
 

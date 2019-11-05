@@ -22,13 +22,13 @@ final class EnviromentClass: ObservableObject{
     """
     
     init(){
-        let initial_session = Session()
-        let initial_client = Client(client_id: randomArray(), client_key: randomArray(), client_iv: randomArray())
-        self.client_list = [initial_client]
-        self.server_list =  [initial_session]
+        self.client_list = []
+        self.server_list = []
         self.selected_client = 0
         self.selected_server = 0
-        self.server_list[0].as.signUp(client: initial_client)
+        self.add_server()
+        self.add_client()
+        self.server_list[0].as.signUp(client: self.client_list[0])
     }
     
     func add_client(){
@@ -36,9 +36,16 @@ final class EnviromentClass: ObservableObject{
         let key = randomArray()
         let iv = randomArray()
         self.client_list.append(Client(client_id: id, client_key: key, client_iv: iv))
+        //self.client_list.last!.success_server_list
+        for value in 0..<self.server_list.count{
+            self.client_list.last!.success_server_list[value] = false
+        }
     }
     
     func add_server(){
         self.server_list.append(Session())
+        for value in 0..<self.client_list.count{
+            self.client_list[value].success_server_list[self.server_list.count-1] = false
+        }
     }
 }

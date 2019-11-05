@@ -6,11 +6,10 @@
 //  Copyright © 2019 pookjw. All rights reserved.
 //
 
-import SwiftUI
 import Foundation
 import CryptoSwift
 
-func runKerberos(servers: Session, client: Client) -> String{
+func runKerberos(servers: Session, client: Client, server_number: Int) -> String{
     var result = ""
     do{
         result += "\nRequesting token1 to Authentication Server..."
@@ -24,7 +23,7 @@ func runKerberos(servers: Session, client: Client) -> String{
         result += "\nRequesting token5 to Service Server..."
         client.token5 = try servers.ss.stage6(token4: client.token4)
         result += "\nChecking token5..."
-        try client.stage7()
+        try client.stage7(server_number: server_number)
         result += "\nSuccess!"
     }catch let error as NSError {
         result += "\n\(error)"
@@ -50,7 +49,7 @@ class Client{
     var tgs_session_iv: [UInt8] = []
     var server_session_key: [UInt8] = []
     var server_session_iv: [UInt8] = []
-    var success = false
+    var success_server_list: [Int: Bool] = [:]
     enum CLIENT_ERROR: Error{
         case TOKEN1_IS_NIL
         case TOKEN3_IS_NIL
@@ -93,7 +92,7 @@ class Client{
         return result
     }
     
-    func stage7() throws{
+    func stage7(server_number: Int) throws{
         if token5 == nil{
             throw CLIENT_ERROR.TOKEN5_IS_NIL
         }
@@ -101,7 +100,7 @@ class Client{
         if timestamp != token5?.timestamp{
             throw CLIENT_ERROR.INVALID_TIMESTAMP
         }
-        self.success = true
+        self.success_server_list[server_number] = true
     }
 }
 

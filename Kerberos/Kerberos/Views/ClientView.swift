@@ -36,11 +36,12 @@ struct ClientView: View {
                     }
                     Text(self.enviromentClass.client_list[value].client_id.toString)
                     Spacer()
-                    if self.enviromentClass.client_list[value].success{
+                    if self.enviromentClass.client_list[value].success_server_list[self.enviromentClass.selected_server]!{
                         Image(systemName: "lock.open.fill")
                     }else{
                         Image(systemName: "lock.fill")
                     }
+                    Text("(at: \(self.enviromentClass.selected_server))")
                 }
             }
         }
