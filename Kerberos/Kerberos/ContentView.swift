@@ -23,6 +23,7 @@ struct ContentView: View {
                     Text("Run")
                         .fontWeight(.heavy)
                         .font(.system(size: 40))
+                        .foregroundColor(Color.red)
                 }
                 Spacer()
                     .frame(height: 40)
