@@ -20,7 +20,6 @@ struct ServerView: View {
                 Image(systemName: "plus")
             }
         }
-            .scaleEffect(1.5)
     }
     
     var body: some View {
@@ -35,7 +34,7 @@ struct ServerView: View {
                             Image(systemName: "circle")
                         }
                     }
-                    Text(String(value))
+                    Text("Server: \(value)")
                     Spacer()
                 }
                 
@@ -53,6 +52,7 @@ struct ServerView: View {
 
 struct EditView: View{
     @EnvironmentObject var enviromentClass: EnviromentClass
+    @State var needRefresh: Bool = false
     var server_number: Int = 0
     
     var sheetToggle: some View{
@@ -65,11 +65,12 @@ struct EditView: View{
         NavigationView{
             List{
                 ForEach(0..<self.enviromentClass.server_list.count, id: \.self){ value in
-                    NavigationLink(destination: SignedClientView(server_number: value)){
-                        Text("Server \(value)")
+                    NavigationLink(destination: SignedClientView(needRefresh: self.$needRefresh, server_number: value)){
+                        Text("Server: \(value)")
                     }
                 }
             }
+            .accentColor(self.needRefresh ? .white : .black)
             .navigationBarTitle(Text("Edit Client Server"))
             .navigationBarItems(trailing: sheetToggle)
         }
@@ -78,26 +79,47 @@ struct EditView: View{
 
 struct SignedClientView: View{
     @EnvironmentObject var enviromentClass: EnviromentClass
+    @Binding var needRefresh: Bool
     var server_number: Int
+    
+    var navigationBarButton: some View{
+        HStack{
+            Button(action: {self.needRefresh.toggle()}){
+                Image(systemName: "arrow.clockwise")
+            }
+        }
+    }
+    
     var body: some View{
         List{
             ForEach(0..<self.enviromentClass.server_list[server_number].as.client_id_list.count, id: \.self){ value in
                 Text(self.enviromentClass.server_list[self.server_number].as.client_id_list[value].toString)
             }
-            NavigationLink(destination: ClientListView(server_number: server_number)){
+            NavigationLink(destination: ClientListView(needRefresh: self.$needRefresh, server_number: server_number)){
                 Image(systemName: "plus.circle.fill")
                     .foregroundColor(Color.green)
                 Text("Add item...")
                 Spacer()
             }
         }
-        .navigationBarTitle(Text("\(server_number)"), displayMode: .inline)
+        .navigationBarTitle(Text("Server: \(server_number)"), displayMode: .inline)
+        .navigationBarItems(trailing: navigationBarButton)
     }
 }
 
 struct ClientListView: View{
     @EnvironmentObject var enviromentClass: EnviromentClass
+    @Binding var needRefresh: Bool
     var server_number: Int
+    
+    var navigationBarButton: some View{
+        HStack{
+            Button(action: {self.needRefresh.toggle()}){
+                Image(systemName: "arrow.clockwise")
+            }
+        }
+    }
+    
     var body: some View{
         List{
             ForEach(0..<self.enviromentClass.client_list.count, id: \.self){ value in
@@ -119,6 +141,7 @@ struct ClientListView: View{
             }
         }
         .navigationBarTitle(Text("Add Client"))
+        .navigationBarItems(trailing: navigationBarButton)
     }
 }
 

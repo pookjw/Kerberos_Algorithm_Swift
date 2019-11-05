@@ -6,27 +6,30 @@
 //  Copyright © 2019 pookjw. All rights reserved.
 //
 
+import SwiftUI
 import Foundation
 import CryptoSwift
 
-func runKerberos(servers: Session, client: Client){
+func runKerberos(servers: Session, client: Client) -> String{
+    var result = ""
     do{
-        print("Requesting token1 to Authentication Server...")
+        result += "\nRequesting token1 to Authentication Server..."
         client.token1 = try servers.as.stage2(client_id: client.client_id)
-        print("Creating token2...")
+        result += "\nCreating token2..."
         client.token2 = try client.stage3()
-        print("Requesting token3 to Ticket Granting Service...")
+        result += "\nRequesting token3 to Ticket Granting Service..."
         client.token3 = try servers.tgs.stage4(token2: client.token2)
-        print("Creating token4...")
+        result += "\nCreating token4..."
         client.token4 = try client.stage5()
-        print("Requesting token5 to Service Server...")
+        result += "\nRequesting token5 to Service Server..."
         client.token5 = try servers.ss.stage6(token4: client.token4)
-        print("Checking token5...")
+        result += "\nChecking token5..."
         try client.stage7()
-        print("Success!")
+        result += "\nSuccess!"
     }catch let error as NSError {
-        print("\(error)")
+        result += "\n\(error)"
     }
+    return result
 }
 
 protocol Server: AnyObject{

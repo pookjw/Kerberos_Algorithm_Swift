@@ -1,8 +1,8 @@
 # Kerberos_Algorithm_Swift
 
-![1](https://live.staticflickr.com/65535/49011461207_10dbbd00a3_o.png)
+![1](https://live.staticflickr.com/65535/49016194106_54341209cb_o.png)
 
-Not a real Kerberos. It doesn't communicate with servers. Just commutes with Swift-class with Kerberos algorithm.
+Not a real Kerberos. It doesn't communicate with actual servers. Just communicates with Swift object with Kerberos algorithm.
 
 Used AES-128 with [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift).
 
@@ -100,13 +100,13 @@ Success!
 
 ## To Do
 
-- Fix SwiftUI EnviromentObject refresh bug
+- Fix SwiftUI EnviromentObject refresh bug: Added Refresh button. This is a SwiftUI bug. Apple should fix this. Check [here](https://stackoverflow.com/questions/57727478/refreshing-a-swiftui-list) to hack this.
 
 - Add Kerberos fundamental vulnerability
 
 - Enhance timestamp
 
-- Add LogView
+- ~~Add LogView~~ Done
 
 - More error handling
 

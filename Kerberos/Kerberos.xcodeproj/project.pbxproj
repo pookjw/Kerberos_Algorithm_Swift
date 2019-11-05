@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F30C49B02370F91E00579356 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30C49AF2370F91E00579356 /* LogView.swift */; };
 		F32A125B236E9CB300B79507 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A125A236E9CB300B79507 /* AppDelegate.swift */; };
 		F32A125D236E9CB300B79507 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A125C236E9CB300B79507 /* SceneDelegate.swift */; };
 		F32A125F236E9CB300B79507 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A125E236E9CB300B79507 /* ContentView.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F30C49AF2370F91E00579356 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		F32A1257236E9CB300B79507 /* Kerberos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kerberos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32A125A236E9CB300B79507 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F32A125C236E9CB300B79507 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				F32A12B5236EA9B500B79507 /* SettingView.swift */,
 				F32A12BB236EAAB000B79507 /* ClientView.swift */,
 				F32A12D2236EC4B400B79507 /* ServerView.swift */,
+				F30C49AF2370F91E00579356 /* LogView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				F32A12B7236EA9B500B79507 /* SettingView.swift in Sources */,
 				F32A12D3236EC4B400B79507 /* ServerView.swift in Sources */,
 				F32A125F236E9CB300B79507 /* ContentView.swift in Sources */,
+				F30C49B02370F91E00579356 /* LogView.swift in Sources */,
 				F32A12B0236EA98600B79507 /* Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

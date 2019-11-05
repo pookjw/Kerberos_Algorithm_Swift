@@ -10,12 +10,14 @@ import SwiftUI
 
 struct SettingView: View {
     @EnvironmentObject var enviromentClass: EnviromentClass
+    @State var needRefresh: Bool = false
     
     var body: some View {
         List{
-            NavigationLink(destination: ClientView()){
+            NavigationLink(destination: ClientView(needRefresh: self.$needRefresh)){
                 Text("Client List")
             }
+                .accentColor(self.needRefresh ? .white : .black)
             NavigationLink(destination: ServerView()){
                 Text("Server List")
             }

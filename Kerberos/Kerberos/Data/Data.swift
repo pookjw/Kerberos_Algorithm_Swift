@@ -14,6 +14,12 @@ final class EnviromentClass: ObservableObject{
     @Published var selected_client: Int
     @Published var selected_server: Int
     @Published var showSheet = false
+    @Published var log = """
+    Welcome to Kerberos Swift!
+    This is a presentational data. Copyright pookjw. All rights reserved.
+    Check GitHub for more information!!!
+    
+    """
     
     init(){
         let initial_session = Session()

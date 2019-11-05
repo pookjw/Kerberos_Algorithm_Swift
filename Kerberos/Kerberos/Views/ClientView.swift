@@ -10,11 +10,16 @@ import SwiftUI
 
 struct ClientView: View {
     @EnvironmentObject var enviromentClass: EnviromentClass
+    @Binding var needRefresh: Bool
     var addButton: some View{
-        Button(action: {self.enviromentClass.add_client()}){
-            Image(systemName: "plus")
+        HStack{
+            Button(action: {self.needRefresh.toggle()}){
+                Image(systemName: "arrow.clockwise")
+            }
+            Button(action: {self.enviromentClass.add_client()}){
+                Image(systemName: "plus")
+            }
         }
-            .scaleEffect(1.5)
     }
     
     var body: some View {
@@ -44,8 +49,3 @@ struct ClientView: View {
     }
 }
 
-struct ClientView_Previews: PreviewProvider {
-    static var previews: some View {
-        ClientView()
-    }
-}
