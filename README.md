@@ -88,7 +88,7 @@ Go to **Settings (gear icon)** and adjust them.
 
 ![1](https://live.staticflickr.com/65535/49022143848_29c49a82d7_o.png)
 
-Touch <span style="color:blue">Play</span> button. If running algorithm was successful, you can see this message:
+Touch **Play** button. If running algorithm was successful, you can see this message:
 
 ```
 Requesting token1 to Authentication Server...
