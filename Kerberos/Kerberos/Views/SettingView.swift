@@ -32,6 +32,18 @@ struct SettingView: View {
                 NavigationLink(destination: ServerView()){
                     Text("Server List")
                 }
+                NavigationLink(destination: wheelPicker(value: $enviromentClass.timeout, title: "Timeout")){
+                    Text("Timeout")
+                    Spacer()
+                    Text(String(self.enviromentClass.timeout))
+                        .foregroundColor(Color.gray)
+                }
+                NavigationLink(destination: wheelPicker(value: $enviromentClass.delay, title: "Delay")){
+                    Text("Delay")
+                    Spacer()
+                    Text(String(self.enviromentClass.delay))
+                        .foregroundColor(Color.gray)
+                }
                 Button(action: {self.enviromentClass.log = EnviromentClass.defaultLog}){
                     Text("Clear Log")
                         .foregroundColor(Color.red)
@@ -45,6 +57,21 @@ struct SettingView: View {
             .navigationBarItems(trailing: navigationBarButton)
         }
         
+    }
+}
+
+struct wheelPicker: View{
+    @Binding var value: Int
+    var title: String
+    
+    var body: some View{
+        Picker(selection: $value, label:
+        Text("")){
+            ForEach(0...500, id: \.self){ number in
+                Text(String(number)).tag(number)
+            }
+        }
+            .navigationBarTitle(title)
     }
 }
 

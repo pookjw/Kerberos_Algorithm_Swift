@@ -26,6 +26,8 @@ struct ContentView: View {
                     servers: self.enviromentClass.server_list[self.enviromentClass.selected_server],
                     client: self.enviromentClass.client_list[self.enviromentClass.selected_client],
                     server_number: self.enviromentClass.selected_server,
+                    timeout: Double(self.enviromentClass.timeout),
+                    delay: UInt32(self.enviromentClass.delay),
                     log: &self.enviromentClass.log
                 )
             }

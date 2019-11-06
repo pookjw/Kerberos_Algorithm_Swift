@@ -9,7 +9,7 @@
 import Foundation
 import CryptoSwift
 
-func runKerberos(servers: Session, client: Client, server_number: Int, log: inout String){
+func runKerberos(servers: Session, client: Client, server_number: Int, timeout: Double, delay: UInt32, log: inout String){
     func add_log(_ number: Int){
         let list = [
             "Requesting token1 to Authentication Server...", // 0
@@ -39,10 +39,12 @@ func runKerberos(servers: Session, client: Client, server_number: Int, log: inou
         add_log(4)
         client.token5 = try servers.ss.stage6(token4: client.token4)
         add_log(5)
-        try client.stage7(server_number: server_number)
+        try client.stage7(timeout: timeout, delay: delay, server_number: server_number)
         add_log(6)
     }catch AS.AS_ERROR.ID_IS_NOT_SIGNED{
         add_log(text: "Error: Client is not signed to Server!")
+    }catch Client.CLIENT_ERROR.TIMEOUT{
+        add_log(text: "Error: Timeout!")
     }catch let error as NSError {
         print(error)
         log += "\n- \(error)"
@@ -72,7 +74,7 @@ class Client{
         case TOKEN1_IS_NIL
         case TOKEN3_IS_NIL
         case TOKEN5_IS_NIL
-        case INVALID_TIMESTAMP
+        case TIMEOUT
     }
     init(client_id: [UInt8], client_key: [UInt8], client_iv: [UInt8]){
         self.client_id = client_id
@@ -110,13 +112,20 @@ class Client{
         return result
     }
     
-    func stage7(server_number: Int) throws{
+    func stage7(timeout: Double, delay: UInt32, server_number: Int) throws{
         if token5 == nil{
             throw CLIENT_ERROR.TOKEN5_IS_NIL
         }
-        let timestamp = try token5!.encrypted_timestamp_with_server_session.decrypt(key: server_session_key, iv: server_session_iv)
-        if timestamp != token5?.timestamp{
-            throw CLIENT_ERROR.INVALID_TIMESTAMP
+        
+        let dataformatter = DateFormatter()
+        dataformatter.dateFormat = "yyyyMMddHHmmss'00'"
+        
+        let ss_time_uint8_array = try token5!.encrypted_timestamp_with_server_session.decrypt(key: server_session_key, iv: server_session_iv)
+        let ss_time_date = dataformatter.date(from: ss_time_uint8_array.toString)
+        sleep(delay)
+        
+        if Date().timeIntervalSince(ss_time_date!) > timeout{
+            throw CLIENT_ERROR.TIMEOUT
         }
         self.success_server_list[server_number] = true
     }
@@ -208,6 +217,11 @@ class SS: Server{
         if token4 == nil{
             throw SS_ERROR.TOKEN4_IS_NIL
         }
+        
+        let dataformatter = DateFormatter()
+        dataformatter.dateFormat = "yyyyMMddHHmmss'00'"
+        let current_time_uint8_array = dataformatter.string(from: Date()).toArrayUInt8
+        
         var result = Token5()
         
         let server_session_key = try token4!.encrypted_server_seesion_key_with_server_secret.decrypt(key: secret_key, iv: secret_iv)
@@ -221,8 +235,7 @@ class SS: Server{
             throw SS_ERROR.ID_IS_NOT_MATCHING
         }
         
-        result.timestamp = timestamp()
-        result.encrypted_timestamp_with_server_session = try result.timestamp.encrypt(key: server_session_key, iv: server_session_iv)
+        result.encrypted_timestamp_with_server_session = try current_time_uint8_array.encrypt(key: server_session_key, iv: server_session_iv)
         return result
     }
 }
@@ -268,7 +281,6 @@ struct Token4{
 }
 
 struct Token5{
-    var timestamp = Array<UInt8>()
     var encrypted_timestamp_with_server_session = Array<UInt8>() // messageH
 }
 
@@ -283,10 +295,6 @@ func randomArray() -> [UInt8]{
 
 func randomArray(input: String) -> [UInt8]{
     return Array<UInt8>(input.utf8)
-}
-
-func timestamp() -> [UInt8]{
-    return randomArray()
 }
 
 extension String{
