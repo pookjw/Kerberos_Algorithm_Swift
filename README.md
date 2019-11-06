@@ -1,6 +1,6 @@
 # Kerberos_Algorithm_Swift
 
-![1](https://live.staticflickr.com/65535/49022131768_b866a9cd96_o.png)
+![1](https://live.staticflickr.com/65535/49022903432_b3c011c1cb_o.png)
 
 Not a real Kerberos. It doesn't communicate with actual servers. Just communicates with Swift object with Kerberos algorithm.
 
@@ -10,7 +10,7 @@ Used AES-128 with [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/C
 
 ## Fundamental Algorithm
 
-More Details can check from [Kerberos (protocol)](https://en.wikipedia.org/wiki/Kerberos_(protocol))
+More Details can check at [Kerberos (protocol)](https://en.wikipedia.org/wiki/Kerberos_(protocol))
 
 1. Client sends ID to AS. AS checks that Client is signed up.
 

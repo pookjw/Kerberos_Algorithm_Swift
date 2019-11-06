@@ -48,8 +48,8 @@ struct SettingView: View {
                     Text("Clear Log")
                         .foregroundColor(Color.red)
                 }
-                Button(action: {self.enviromentClass.logoutAllSessions()}){
-                    Text("Logout All Sessions")
+                Button(action: {self.enviromentClass.unauthorizeAllSessions()}){
+                    Text("Unauthorize All Sessions")
                         .foregroundColor(Color.red)
                 }
             }

@@ -52,7 +52,7 @@ final class EnviromentClass: ObservableObject{
         }
     }
     
-    func logoutAllSessions(){
+    func unauthorizeAllSessions(){
         for value_1 in 0..<self.client_list.count{
             self.client_list[value_1].token1 = nil
             self.client_list[value_1].token2 = nil
