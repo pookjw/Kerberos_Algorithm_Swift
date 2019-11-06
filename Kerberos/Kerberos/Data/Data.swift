@@ -53,11 +53,6 @@ final class EnviromentClass: ObservableObject{
     
     func unauthorizeAllSessions(){
         for value_1 in 0..<self.client_list.count{
-            self.client_list[value_1].token1 = nil
-            self.client_list[value_1].token2 = nil
-            self.client_list[value_1].token3 = nil
-            self.client_list[value_1].token4 = nil
-            self.client_list[value_1].token5 = nil
             for value_2 in 0..<self.server_list.count{
                 self.client_list[value_1].success_server_list[value_2] = false
             }

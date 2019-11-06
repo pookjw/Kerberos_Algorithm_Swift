@@ -41,14 +41,23 @@ func runKerberos(servers: Session, client: Client, server_number: Int, timeout: 
         add_log(5)
         try client.stage7(timeout: timeout, delay: delay, server_number: server_number)
         add_log(6)
+        client.success_server_list[server_number] = true
     }catch AS.AS_ERROR.ID_IS_NOT_SIGNED{
         add_log(text: "Error: Client is not signed to Server!")
+        client.success_server_list[server_number] = false
     }catch Client.CLIENT_ERROR.TIMEOUT{
         add_log(text: "Error: Timeout!")
+        client.success_server_list[server_number] = false
     }catch let error as NSError {
         print(error)
         log += "\n- \(error)"
+        client.success_server_list[server_number] = false
     }
+    client.token1 = nil
+    client.token2 = nil
+    client.token3 = nil
+    client.token4 = nil
+    client.token5 = nil
 }
 
 protocol Server: AnyObject{
@@ -127,7 +136,6 @@ class Client{
         if Date().timeIntervalSince(ss_time_date!) > timeout{
             throw CLIENT_ERROR.TIMEOUT
         }
-        self.success_server_list[server_number] = true
     }
 }
 
