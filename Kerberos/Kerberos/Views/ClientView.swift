@@ -15,7 +15,7 @@ struct ClientView: View {
         HStack{
             Button(action: {self.needRefresh.toggle()}){
                 Spacer()
-                    .frame(width: 50)
+                    .frame(width: 100)
                 Image(systemName: "arrow.clockwise")
             }
             Button(action: {self.enviromentClass.add_client()}){

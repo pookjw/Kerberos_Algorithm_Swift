@@ -12,51 +12,38 @@ struct SettingView: View {
     @EnvironmentObject var enviromentClass: EnviromentClass
     @State var needRefresh: Bool = false
     
-    var navigationBarButton: some View{
-        HStack{
-            Spacer()
-                .frame(width: 50)
-            Button(action: {self.enviromentClass.showSheet_1.toggle()}){
-                Image(systemName: "xmark")
-            }
-        }
-    }
     
     var body: some View {
-        NavigationView{
-            List{
-                NavigationLink(destination: ClientView(needRefresh: self.$needRefresh)){
-                    Text("Client List")
-                }
-                    .accentColor(self.needRefresh ? .white : .black)
-                NavigationLink(destination: ServerView()){
-                    Text("Server List")
-                }
-                NavigationLink(destination: wheelPicker(value: $enviromentClass.timeout, title: "Timeout")){
-                    Text("Timeout")
-                    Spacer()
-                    Text(String(self.enviromentClass.timeout))
-                        .foregroundColor(Color.gray)
-                }
-                NavigationLink(destination: wheelPicker(value: $enviromentClass.delay, title: "Delay")){
-                    Text("Delay")
-                    Spacer()
-                    Text(String(self.enviromentClass.delay))
-                        .foregroundColor(Color.gray)
-                }
-                Button(action: {self.enviromentClass.log = EnviromentClass.defaultLog}){
-                    Text("Clear Log")
-                        .foregroundColor(Color.red)
-                }
-                Button(action: {self.enviromentClass.unauthorizeAllSessions()}){
-                    Text("Unauthorize All Sessions")
-                        .foregroundColor(Color.red)
-                }
+        List{
+            NavigationLink(destination: ClientView(needRefresh: self.$needRefresh)){
+                Text("Client List")
             }
-            .navigationBarTitle("Settings")
-            .navigationBarItems(trailing: navigationBarButton)
+            .accentColor(self.needRefresh ? .white : .black)
+            NavigationLink(destination: ServerView()){
+                Text("Server List")
+            }
+            NavigationLink(destination: wheelPicker(value: $enviromentClass.timeout, title: "Timeout")){
+                Text("Timeout")
+                Spacer()
+                Text(String(self.enviromentClass.timeout))
+                    .foregroundColor(Color.gray)
+            }
+            NavigationLink(destination: wheelPicker(value: $enviromentClass.delay, title: "Delay")){
+                Text("Delay")
+                Spacer()
+                Text(String(self.enviromentClass.delay))
+                    .foregroundColor(Color.gray)
+            }
+            Button(action: {self.enviromentClass.log = EnviromentClass.defaultLog}){
+                Text("Clear Log")
+                    .foregroundColor(Color.red)
+            }
+            Button(action: {self.enviromentClass.unauthorizeAllSessions()}){
+                Text("Unauthorize All Sessions")
+                    .foregroundColor(Color.red)
+            }
         }
-        
+        .navigationBarTitle("Settings", displayMode: .inline)
     }
 }
 
@@ -67,10 +54,11 @@ struct wheelPicker: View{
     var body: some View{
         Picker(selection: $value, label:
         Text("")){
-            ForEach(0...500, id: \.self){ number in
+            ForEach(0...10, id: \.self){ number in
                 Text(String(number)).tag(number)
             }
         }
+        .padding(.horizontal, 99999999999.0)
             .navigationBarTitle(title)
     }
 }

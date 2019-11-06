@@ -13,9 +13,9 @@ struct ServerView: View {
     
     var navtigationBarButton: some View{
         HStack{
-            Button(action: {self.enviromentClass.showSheet_2.toggle()}){
+            Button(action: {self.enviromentClass.showSheet.toggle()}){
                 Spacer()
-                    .frame(width: 50)
+                    .frame(width: 100)
                 Image(systemName: "pencil")
             }
             Button(action: {self.enviromentClass.add_server()}){
@@ -46,7 +46,7 @@ struct ServerView: View {
         }
         .navigationBarTitle(Text("Server"), displayMode: .inline)
         .navigationBarItems(trailing: navtigationBarButton)
-        .sheet(isPresented: $enviromentClass.showSheet_2){
+        .sheet(isPresented: $enviromentClass.showSheet){
             EditView()
                 .environmentObject(self.enviromentClass)
         }
@@ -61,9 +61,9 @@ struct EditView: View{
     
     var navtigationBarButton: some View{
         HStack{
-            Button(action: {self.enviromentClass.showSheet_2.toggle()}){
+            Button(action: {self.enviromentClass.showSheet.toggle()}){
                 Spacer()
-                    .frame(width: 50)
+                    .frame(width: 100)
                 Image(systemName: "xmark")
             }
         }
@@ -94,7 +94,7 @@ struct SignedClientView: View{
         HStack{
             Button(action: {self.needRefresh.toggle()}){
                 Spacer()
-                    .frame(width: 50)
+                    .frame(width: 100)
                 Image(systemName: "arrow.clockwise")
             }
         }
@@ -126,7 +126,7 @@ struct ClientListView: View{
         HStack{
             Button(action: {self.needRefresh.toggle()}){
                 Spacer()
-                    .frame(width: 50)
+                    .frame(width: 100)
                 Image(systemName: "arrow.clockwise")
             }
         }

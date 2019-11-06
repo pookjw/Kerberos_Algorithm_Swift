@@ -30,7 +30,7 @@ These are combined on Token1.
 
 These are combined on Token2. Now Client knows TGS Session Key from messageA.
 
-4. The TGS retrieves messageC and decrypts using TGS secret key and gets TGS session key. Using this key, the TGS decrypts messageD and compare client ID from C and D. If they match,'
+4. The TGS retrieves messageC and decrypts using TGS secret key and gets TGS session key. Using this key, the TGS decrypts messageD and compare client ID from C and D. If they match,
 
 - messageE : Client-to-server ticket (client ID, Server Session Key) encrypted using the Server secret key
 
@@ -100,7 +100,7 @@ Checking token5...
 Success!
 ```
 
-**Make sure that selected Client is signed up to selected Server!!! If it didn't you will see AS.AS_ERROR.**
+**Make sure that selected Client is signed up to selected Server!!! If it isn''t you will see AS.AS_ERROR.**
 
 ## To Do
 

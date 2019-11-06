@@ -13,10 +13,12 @@ struct ContentView: View {
     
     var navtigationBarButton: some View{
         HStack{
-            Button(action: {self.enviromentClass.showSheet_1.toggle()}){
+            Button(action: {self.enviromentClass.log += "\nGolden Ticket Feature: Coming Soon!"}){
                 Spacer()
-                    .frame(width: 50)
-                Image(systemName: "gear")
+                    .frame(width: 100)
+                Image(systemName: "play.circle")
+                    .foregroundColor(Color.yellow)
+                    .scaleEffect(1.5)
             }
             Button(action: {
                 self.enviromentClass.log += "\n"
@@ -36,7 +38,6 @@ struct ContentView: View {
                 Spacer()
                     .frame(width: 25)
                 Image(systemName: "play.fill")
-                    .foregroundColor(Color.red)
                     .scaleEffect(1.5)
             }
         }
@@ -51,16 +52,16 @@ struct ContentView: View {
                     .frame(height: 20)
                 Text("Selected Client: \(self.enviromentClass.client_list[self.enviromentClass.selected_client].client_id.toString)")
                 Text("Selected Server: \(self.enviromentClass.selected_server)")
+                NavigationLink(destination: SettingView()){
+                    Image(systemName: "gear")
+                    Text("Settings...")
+                }
                 Spacer()
                     .frame(height: 20)
             }
             .padding([.leading, .trailing], 10.0)
             .navigationBarTitle("Kerberos")
             .navigationBarItems(trailing: navtigationBarButton)
-            .sheet(isPresented: $enviromentClass.showSheet_1){
-                SettingView()
-                    .environmentObject(self.enviromentClass)
-            }
         }
     }
 }
