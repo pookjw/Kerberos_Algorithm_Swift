@@ -110,7 +110,7 @@ Success!
 
 - Add Kerberos fundamental vulnerability
 
-- Enhance timestamp
+- ~~Enhance timestamp~~ Done
 
 - ~~Add LogView~~ Done
 
