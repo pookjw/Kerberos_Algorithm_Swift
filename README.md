@@ -56,8 +56,6 @@ This is called on Token5.
 
 ## How to use this
 
-**Outdated Guide**. will update...
-
 - Creating new Client
 
 Go to **Settings (gear icon) → Client List → Plus Button (located on right top)**
