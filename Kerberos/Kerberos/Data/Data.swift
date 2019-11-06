@@ -20,8 +20,8 @@ final class EnviromentClass: ObservableObject{
     @Published var selected_server: Int
     @Published var showSheet_1 = false
     @Published var showSheet_2 = false
-    @Published var timeout = 3
-    @Published var delay = 4
+    @Published var timeout = 1
+    @Published var delay = 0
     @Published var log = EnviromentClass.defaultLog
     
     init(){

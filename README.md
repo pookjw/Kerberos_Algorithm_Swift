@@ -1,10 +1,10 @@
 # Kerberos_Algorithm_Swift
 
-![1](https://live.staticflickr.com/65535/49018208826_a5dabb78e5_o.png)
+![1](https://live.staticflickr.com/65535/49022131768_b866a9cd96_o.png)
 
 Not a real Kerberos. It doesn't communicate with actual servers. Just communicates with Swift object with Kerberos algorithm.
 
-Used AES-128 with [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift).
+Used AES-128 with [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift). Coded with SwiftUI.
 
 **This project is still in progress**
 
@@ -62,19 +62,19 @@ This is called on Token5.
 
 Go to **Settings (gear icon) → Client List → Plus Button (located on right top)**
 
-![3](https://live.staticflickr.com/65535/49011271766_9c7f29dcff_o.png)
+![3](https://live.staticflickr.com/65535/49022861537_b976d03eed_o.png)
 
 - Creating new Server
 
 Go to **Settings (gear icon) → Server List → Plus Button (located on right top)**
 
-![2](https://live.staticflickr.com/65535/49011267841_df941b6246_o.png)
+![2](https://live.staticflickr.com/65535/49022863892_2f088ee9f7_o.png)
 
 - Signing up Client to Server
 
 Go to **Settings (gear icon) → Server List → Pencil Button (located on right top) → Select Server you want to sign up → Add item...  → Select Client you want to sign up**
 
-![3](https://live.staticflickr.com/65535/49011277536_720504b922_o.png)
+![3](https://live.staticflickr.com/65535/49022867172_bb691fb2a2_o.png)
 
 - Select Client and Server to run algorithm
 
@@ -82,11 +82,15 @@ Select Client: Go to **Settings (gear icon) → Client List →  Touch Client yo
 
 Select Server: Go to **Settings (gear icon) → Server List →  Touch Server you want to select**
 
+- Adjust Timeout and Delay value
+
+Go to **Settings (gear icon)** and adjust them.
+
 - Running Algorithm
 
-![1](https://live.staticflickr.com/65535/49016194106_54341209cb_o.png)
+![1](https://live.staticflickr.com/65535/49022143848_29c49a82d7_o.png)
 
-Touch **Run** button. If running algorithm was successful, you can see this message:
+Touch <span style="color:blue">Play</span> button. If running algorithm was successful, you can see this message:
 
 ```
 Requesting token1 to Authentication Server...
