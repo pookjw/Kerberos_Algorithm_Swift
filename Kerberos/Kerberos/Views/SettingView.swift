@@ -16,34 +16,67 @@ struct SettingView: View {
     var body: some View {
         List{
             NavigationLink(destination: ClientView(needRefresh: self.$needRefresh)){
-                Text("Client List")
-            }
-            .accentColor(self.needRefresh ? .white : .black)
-            NavigationLink(destination: ServerView()){
-                Text("Server List")
-            }
-            NavigationLink(destination: GTView()){
-                Text("Golden Ticket")
-                Spacer()
-                if self.enviromentClass.GTMode{
-                    Text("Enabled")
-                        .foregroundColor(Color.gray)
-                }else{
-                    Text("Disabled")
+                HStack{
+                    Image(systemName: "person")
+                        .foregroundColor(Color.blue)
+                        .frame(width: 30)
+                    Text("Client List")
+                    Spacer()
+                    Text(self.enviromentClass.client_list[self.enviromentClass.selected_client].client_id.toString)
                         .foregroundColor(Color.gray)
                 }
             }
+            .accentColor(self.needRefresh ? .white : .black)
+            NavigationLink(destination: ServerView()){
+                HStack{
+                    Image(systemName: "cloud")
+                        .foregroundColor(Color.blue)
+                        .frame(width: 30)
+                    Text("Server List")
+                    Spacer()
+                    Text(String(self.enviromentClass.selected_server))
+                        .foregroundColor(Color.gray)
+                }
+            }
+            NavigationLink(destination: GTView()){
+                HStack{
+                    Image(systemName: "doc.plaintext")
+                        .foregroundColor(Color.orange)
+                        .frame(width: 30)
+                    Text("Golden Ticket")
+                    Spacer()
+                    if self.enviromentClass.GTMode{
+                        Text(self.enviromentClass.client_list[self.enviromentClass.selected_hacker].client_id.toString)
+                                .foregroundColor(Color.gray)
+                    }else{
+                        Text("(Disabled)")
+                                .foregroundColor(Color.gray)
+                    }
+                }
+                
+            }
             NavigationLink(destination: wheelPicker(value: $enviromentClass.timeout, title: "Timeout")){
-                Text("Timeout")
-                Spacer()
-                Text(String(self.enviromentClass.timeout))
-                    .foregroundColor(Color.gray)
+                HStack{
+                    Image(systemName: "timer")
+                        .foregroundColor(Color.blue)
+                        .frame(width: 30)
+                    Text("Timeout")
+                    Spacer()
+                    Text(String(self.enviromentClass.timeout))
+                        .foregroundColor(Color.gray)
+                }
             }
             NavigationLink(destination: wheelPicker(value: $enviromentClass.delay, title: "Delay")){
-                Text("Delay")
-                Spacer()
-                Text(String(self.enviromentClass.delay))
-                    .foregroundColor(Color.gray)
+                HStack{
+                    Image(systemName: "timelapse")
+                        .foregroundColor(Color.blue)
+                        .frame(width: 30)
+                    Text("Delay")
+                    Spacer()
+                    Text(String(self.enviromentClass.delay))
+                        .foregroundColor(Color.gray)
+                }
+
             }
             Button(action: {self.enviromentClass.log = EnviromentClass.defaultLog}){
                 Text("Clear Log")
