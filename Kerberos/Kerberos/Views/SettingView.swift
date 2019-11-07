@@ -34,7 +34,7 @@ struct SettingView: View {
                         .frame(width: 30)
                     Text("Server List")
                     Spacer()
-                    Text(String(self.enviromentClass.selected_server))
+                    Text("Server: \(self.enviromentClass.selected_server)")
                         .foregroundColor(Color.gray)
                 }
             }
