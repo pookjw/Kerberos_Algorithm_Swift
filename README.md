@@ -72,7 +72,7 @@ Go to **Settings (gear icon) → Server List → Plus Button (located on right t
 
 Go to **Settings (gear icon) → Server List → Pencil Button (located on right top) → Select Server you want to sign up → Add item...  → Select Client you want to sign up**
 
-- Select Client and Server to run algorithm
+### Select Client and Server to run algorithm
 
 Select Client: Go to **Settings (gear icon) → Client List →  Touch Client you want to select**
 
