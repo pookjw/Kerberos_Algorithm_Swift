@@ -14,7 +14,7 @@ struct ContentView: View {
     var navtigationBarButton: some View{
         HStack{
             if self.enviromentClass.GTMode{
-                Button(action: {
+                Button(action: { self.enviromentClass.return_code =
                     runKerberos(
                         servers: self.enviromentClass.server_list[self.enviromentClass.selected_server],
                         client: self.enviromentClass.client_list[self.enviromentClass.selected_client],
@@ -24,6 +24,7 @@ struct ContentView: View {
                         delay: UInt32(self.enviromentClass.delay),
                         log: &self.enviromentClass.log
                     )
+                    self.enviromentClass.showAlert = true
                 }){
                     Spacer()
                         .frame(width: 50)
@@ -35,7 +36,7 @@ struct ContentView: View {
                 }
             }
             else{
-                Button(action: {
+                Button(action: { self.enviromentClass.return_code =
                     runKerberos(
                         servers: self.enviromentClass.server_list[self.enviromentClass.selected_server],
                         client: self.enviromentClass.client_list[self.enviromentClass.selected_client],
@@ -44,6 +45,7 @@ struct ContentView: View {
                         delay: UInt32(self.enviromentClass.delay),
                         log: &self.enviromentClass.log
                     )
+                    self.enviromentClass.showAlert = true
                 }
                     )
                 {
@@ -54,6 +56,14 @@ struct ContentView: View {
                 }
             }
         }
+    }
+    
+    var alert: Alert{
+        Alert(title: Text("Result"),
+              message: self.enviromentClass.return_code == 0 ? Text("Success!") : Text("Error! Check result log!"),
+              dismissButton: .default(Text("Dismiss")
+            )
+        )
     }
     
     var body: some View {
@@ -78,6 +88,7 @@ struct ContentView: View {
             .padding([.leading, .trailing], 10.0)
             .navigationBarTitle("Kerberos")
             .navigationBarItems(trailing: navtigationBarButton)
+            .alert(isPresented: $enviromentClass.showAlert, content: {self.alert})
         }
     }
 }

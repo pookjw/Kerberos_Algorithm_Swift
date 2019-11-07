@@ -19,7 +19,9 @@ final class EnviromentClass: ObservableObject{
     @Published var selected_client: Int
     @Published var selected_server: Int
     @Published var selected_hacker: Int
+    @Published var showAlert = false
     @Published var showSheet = false
+    @Published var return_code: Int?
     @Published var GTMode = false
     @Published var timeout = 1
     @Published var delay = 0

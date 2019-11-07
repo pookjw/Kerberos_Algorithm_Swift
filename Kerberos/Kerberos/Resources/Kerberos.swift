@@ -9,7 +9,7 @@
 import Foundation
 import CryptoSwift
 
-func runKerberos(servers: Session, client: Client, hacker: Client? = nil, server_number: Int, timeout: Double, delay: UInt32, log: inout String){
+func runKerberos(servers: Session, client: Client, hacker: Client? = nil, server_number: Int, timeout: Double, delay: UInt32, log: inout String) -> Int{
     func add_log(_ number: Int){
         let list = [
             "- Requesting token1 to Authentication Server...", // 0
@@ -72,19 +72,23 @@ func runKerberos(servers: Session, client: Client, hacker: Client? = nil, server
     }catch AS.AS_ERROR.ID_IS_NOT_SIGNED{
         add_log(text: "- Error: Client is not signed to Server!")
         client.success_server_list[server_number] = false
+        return 1
     }catch Client.CLIENT_ERROR.TIMEOUT{
         add_log(text: "- Error: Timeout!")
         client.success_server_list[server_number] = false
+        return 1
     }catch let error as NSError {
         print("- \(error)")
         log += "\n- \(error)"
         client.success_server_list[server_number] = false
+        return 1
     }
     client.token1 = nil
     client.token2 = nil
     client.token3 = nil
     client.token4 = nil
     client.token5 = nil
+    return 0
 }
 
 protocol Server: AnyObject{

@@ -1,12 +1,10 @@
 # Kerberos_Algorithm_Swift
 
-![1](https://live.staticflickr.com/65535/49022903432_b3c011c1cb_o.png)
+![1](https://live.staticflickr.com/65535/49027543837_f2072eef5a_o.png)
 
-Not a real Kerberos. It doesn't communicate with actual servers. Just communicates with Swift object with Kerberos algorithm.
+Not a real Kerberos. It doesn't communicate with actual servers. Just communicates with Swift object with Kerberos algorithm locally.
 
 Used AES-128 with [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift). Coded with SwiftUI.
-
-**This project is still in progress**
 
 ## Fundamental Algorithm
 
@@ -56,23 +54,23 @@ This is called on Token5.
 
 ## How to use this
 
-- Creating new Client
+### Creating new Client
+
+![3](https://live.staticflickr.com/65535/49027339926_3c0ebef5df_o.png)
 
 Go to **Settings (gear icon) → Client List → Plus Button (located on right top)**
 
-![3](https://live.staticflickr.com/65535/49022861537_b976d03eed_o.png)
+### Creating new Server
 
-- Creating new Server
+![2](https://live.staticflickr.com/65535/49026826763_321fc957c6_o.png)
 
 Go to **Settings (gear icon) → Server List → Plus Button (located on right top)**
 
-![2](https://live.staticflickr.com/65535/49022863892_2f088ee9f7_o.png)
+### Signing up Client to Server
 
-- Signing up Client to Server
+![3](https://live.staticflickr.com/65535/49026829953_0b71161fab_o.png)
 
 Go to **Settings (gear icon) → Server List → Pencil Button (located on right top) → Select Server you want to sign up → Add item...  → Select Client you want to sign up**
-
-![3](https://live.staticflickr.com/65535/49022867172_bb691fb2a2_o.png)
 
 - Select Client and Server to run algorithm
 
@@ -80,13 +78,13 @@ Select Client: Go to **Settings (gear icon) → Client List →  Touch Client yo
 
 Select Server: Go to **Settings (gear icon) → Server List →  Touch Server you want to select**
 
-- Adjust Timeout and Delay value
+### Adjust Timeout and Delay value
 
 Go to **Settings (gear icon)** and adjust them.
 
-- Running Algorithm
+### Running Algorithm
 
-![1](https://live.staticflickr.com/65535/49022143848_29c49a82d7_o.png)
+![1](https://live.staticflickr.com/65535/49027558547_7b447e8948_o.png)
 
 Touch **Play** button. If running algorithm was successful, you can see this message:
 
@@ -101,6 +99,14 @@ Success!
 ```
 
 **Make sure that selected Client is signed up to selected Server!!! If it isn''t you will see AS.AS_ERROR.**
+
+### Running Golden Ticket Exploit
+
+![6](https://live.staticflickr.com/65535/49027566752_c45e020193_o.png)
+
+Go to **Settings (gear icon) → Golden Ticket -> Enable Exploit Mode**
+
+Select Hacker to use Exploit Mode. Hacker, who is not signed up to selected Server, can login to selected Server using Kerberos Golden Ticket Exploit with selected Client ID, which is signed up to selected Server.
 
 ## To Do
 
