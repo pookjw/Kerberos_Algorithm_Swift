@@ -14,7 +14,17 @@ struct ContentView: View {
     var navtigationBarButton: some View{
         HStack{
             if self.enviromentClass.GTMode{
-                Button(action: {self.enviromentClass.log += "\nGolden Ticket Feature: Coming Soon!"}){
+                Button(action: {
+                    runKerberos(
+                        servers: self.enviromentClass.server_list[self.enviromentClass.selected_server],
+                        client: self.enviromentClass.client_list[self.enviromentClass.selected_client],
+                        hacker: self.enviromentClass.client_list[self.enviromentClass.selected_hacker],
+                        server_number: self.enviromentClass.selected_server,
+                        timeout: Double(self.enviromentClass.timeout),
+                        delay: UInt32(self.enviromentClass.delay),
+                        log: &self.enviromentClass.log
+                    )
+                }){
                     Spacer()
                         .frame(width: 50)
                     Text("GT Mode")
@@ -26,9 +36,6 @@ struct ContentView: View {
             }
             else{
                 Button(action: {
-                    self.enviromentClass.log += "\n"
-                    self.enviromentClass.log += "\nClient: \(self.enviromentClass.client_list[self.enviromentClass.selected_client].client_id.toString)"
-                    self.enviromentClass.log += "\nServer: \(self.enviromentClass.selected_server)"
                     runKerberos(
                         servers: self.enviromentClass.server_list[self.enviromentClass.selected_server],
                         client: self.enviromentClass.client_list[self.enviromentClass.selected_client],

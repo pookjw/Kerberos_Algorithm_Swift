@@ -9,47 +9,74 @@
 import Foundation
 import CryptoSwift
 
-func runKerberos(servers: Session, client: Client, server_number: Int, timeout: Double, delay: UInt32, log: inout String){
+func runKerberos(servers: Session, client: Client, hacker: Client? = nil, server_number: Int, timeout: Double, delay: UInt32, log: inout String){
     func add_log(_ number: Int){
         let list = [
-            "Requesting token1 to Authentication Server...", // 0
-            "Creating token2...", // 1
-            "Requesting token3 to Ticket Granting Service...", // 2
-            "Creating token4...", // 3
-            "Requesting token5 to Service Server...", // 4
-            "Checking token5...", // 5
-            "Success!" // 6
+            "- Requesting token1 to Authentication Server...", // 0
+            "- Creating token2...", // 1
+            "- Requesting token3 to Ticket Granting Service...", // 2
+            "- Creating token4...", // 3
+            "- Requesting token5 to Service Server...", // 4
+            "- Checking token5...", // 5
+            "- Success!", // 6
+            
+            // GT Mode Log
+            "- Creating pwned token2...", // 7
+            "- Creating pwned token4..." // 8
         ]
         print(list[number])
-        log += "\n- \(list[number])"
+        log += "\n\(list[number])"
     }
     func add_log(text: String){
         print(text)
-        log += "\n- \(text)"
+        log += "\n\(text)"
     }
+    
+    add_log(text: "")
+    add_log(text: "Client: \(client.client_id.toString)")
+    if hacker != nil{
+        add_log(text: "Hacker: \(hacker!.client_id.toString)")
+    }
+    add_log(text: "Server: \(server_number)")
+    
     do{
-        add_log(0)
-        client.token1 = try servers.as.stage1(client_id: client.client_id)
-        add_log(1)
-        client.token2 = try client.stage2()
-        add_log(2)
-        client.token3 = try servers.tgs.stage3(token2: client.token2)
-        add_log(3)
-        client.token4 = try client.stage4()
-        add_log(4)
-        client.token5 = try servers.ss.stage5(token4: client.token4)
-        add_log(5)
-        try client.stage6(timeout: timeout, delay: delay, server_number: server_number)
-        add_log(6)
-        client.success_server_list[server_number] = true
+        if hacker == nil{
+            add_log(0)
+            client.token1 = try servers.as.stage1(client_id: client.client_id)
+            add_log(1)
+            client.token2 = try client.stage2()
+            add_log(2)
+            client.token3 = try servers.tgs.stage3(token2: client.token2)
+            add_log(3)
+            client.token4 = try client.stage4()
+            add_log(4)
+            client.token5 = try servers.ss.stage5(token4: client.token4)
+            add_log(5)
+            try client.stage6(timeout: timeout, delay: delay)
+            add_log(6)
+            client.success_server_list[server_number] = true
+        }else{
+            add_log(7)
+            hacker!.token2 = try hacker!.gt_stage_2(fake_client_id: client.client_id, tgs_secret_key: servers.tgs.secret_key, tgs_secret_iv: servers.tgs.secret_iv)
+            add_log(2)
+            hacker!.token3 = try servers.tgs.stage3(token2: hacker!.token2)
+            add_log(8)
+            hacker!.token4 = try hacker!.gt_stage_4(fake_client_id: client.client_id)
+            add_log(4)
+            hacker!.token5 = try servers.ss.stage5(token4: hacker!.token4)
+            add_log(5)
+            try hacker!.stage6(timeout: timeout, delay: delay)
+            add_log(6)
+            hacker!.success_server_list[server_number] = true
+        }
     }catch AS.AS_ERROR.ID_IS_NOT_SIGNED{
-        add_log(text: "Error: Client is not signed to Server!")
+        add_log(text: "- Error: Client is not signed to Server!")
         client.success_server_list[server_number] = false
     }catch Client.CLIENT_ERROR.TIMEOUT{
-        add_log(text: "Error: Timeout!")
+        add_log(text: "- Error: Timeout!")
         client.success_server_list[server_number] = false
     }catch let error as NSError {
-        print(error)
+        print("- \(error)")
         log += "\n- \(error)"
         client.success_server_list[server_number] = false
     }
@@ -121,7 +148,7 @@ class Client{
         return result
     }
     
-    func stage6(timeout: Double, delay: UInt32, server_number: Int) throws{
+    func stage6(timeout: Double, delay: UInt32) throws{
         if token5 == nil{
             throw CLIENT_ERROR.TOKEN5_IS_NIL
         }
@@ -136,6 +163,46 @@ class Client{
         if Date().timeIntervalSince(ss_time_date!) > timeout{
             throw CLIENT_ERROR.TIMEOUT
         }
+    }
+    
+    func gt_stage_2(fake_client_id: [UInt8], tgs_secret_key: [UInt8], tgs_secret_iv: [UInt8]) throws -> Token2{
+        var result = Token2()
+        
+        tgs_session_key = randomArray()
+        tgs_session_iv = randomArray()
+        
+        /*
+        struct Token2{
+            var encrypted_client_id_with_tgs_secret = Array<UInt8>() // messageC
+            var encrypted_tgs_seesion_key_with_tgs_secret = Array<UInt8>() // messageC
+            var encrypted_tgs_seesion_iv_with_tgs_secret = Array<UInt8>() // messageC
+            var encrypted_client_id_with_tgs_session = Array<UInt8>() // messageD
+        }
+         */
+        result.encrypted_client_id_with_tgs_secret = try fake_client_id.encrypt(key: tgs_secret_key, iv: tgs_secret_iv)
+        result.encrypted_tgs_seesion_key_with_tgs_secret = try tgs_session_key.encrypt(key: tgs_secret_key, iv: tgs_secret_iv)
+        result.encrypted_tgs_seesion_iv_with_tgs_secret = try tgs_session_iv.encrypt(key: tgs_secret_key, iv: tgs_secret_iv)
+        
+        result.encrypted_client_id_with_tgs_session = try fake_client_id.encrypt(key: tgs_session_key, iv: tgs_session_iv)
+        
+        return result
+    }
+    
+    func gt_stage_4(fake_client_id: [UInt8]) throws -> Token4{
+        if token3 == nil{
+            throw CLIENT_ERROR.TOKEN3_IS_NIL
+        }
+        var result = Token4()
+        server_session_key = try token3!.encrypted_server_session_key_with_tgs_session.decrypt(key: tgs_session_key, iv: tgs_session_iv)
+        server_session_iv = try token3!.encrypted_server_seesion_iv_with_tgs_session.decrypt(key: tgs_session_key, iv: tgs_session_iv)
+        let encrypted_client_id_with_server_session = try fake_client_id.encrypt(key: server_session_key, iv: server_session_iv)
+        
+        result.encrypted_client_id_with_server_secret_key = token3!.encrypted_client_id_with_server_secret_key
+        result.encrypted_server_seesion_key_with_server_secret = token3!.encrypted_server_seesion_key_with_server_secret
+        result.encrypted_server_seesion_iv_with_server_secret = token3!.encrypted_server_seesion_iv_with_server_secret
+        result.encrypted_client_id_with_server_session = encrypted_client_id_with_server_session
+        
+        return result
     }
 }
 
@@ -163,6 +230,7 @@ class AS{
         let tgs_session_iv = randomArray()
         result.encrypted_tgs_session_key_with_client = try tgs_session_key.encrypt(key: client_key_list[client_id]!, iv: client_iv_list[client_id]!)
         result.encrypted_tgs_seesion_iv_with_client = try tgs_session_iv.encrypt(key: client_key_list[client_id]!, iv: client_iv_list[client_id]!)
+        
         result.encrypted_client_id_wuth_tgs_secret = try client_id.encrypt(key: tgs_delegate!.secret_key, iv: tgs_delegate!.secret_iv)
         result.encrypted_tgs_seesion_key_with_tgs_secret = try tgs_session_key.encrypt(key: tgs_delegate!.secret_key, iv: tgs_delegate!.secret_iv)
         result.encrypted_tgs_seesion_iv_with_tgs_secret =  try tgs_session_iv.encrypt(key: tgs_delegate!.secret_key, iv: tgs_delegate!.secret_iv)
