@@ -112,12 +112,12 @@ Select Hacker to use Exploit Mode. Hacker, who is not signed up to selected Serv
 
 - Fix SwiftUI EnviromentObject refresh bug: Added Refresh button. This is a SwiftUI bug. Apple should fix this. Check [here](https://stackoverflow.com/questions/57727478/refreshing-a-swiftui-list) to hack this.
 
-- Add Kerberos fundamental vulnerability
+- ~~Add Kerberos fundamental vulnerability~~ Done
 
 - ~~Enhance timestamp~~ Done
 
 - ~~Add LogView~~ Done
 
-- More error handling
+- ~~More error handling~~ Done
 
 - Multi Encryption Algorithm
