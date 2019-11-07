@@ -31,15 +31,18 @@ struct ServerView: View {
             ForEach(0..<self.enviromentClass.server_list.count, id: \.self){ value in
                 HStack{
                     Button(action: {self.enviromentClass.selected_server = value}){
+                        HStack{
                         if self.enviromentClass.selected_server == value{
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundColor(Color.blue)
                         }else{
                             Image(systemName: "circle")
+                                .foregroundColor(Color.gray)
+                        }
+                        Text("Server: \(value)")
+                        Spacer()
                         }
                     }
-                    Text("Server: \(value)")
-                    Spacer()
                 }
                 
             }

@@ -22,6 +22,17 @@ struct SettingView: View {
             NavigationLink(destination: ServerView()){
                 Text("Server List")
             }
+            NavigationLink(destination: GTView()){
+                Text("Golden Ticket")
+                Spacer()
+                if self.enviromentClass.GTMode{
+                    Text("Enabled")
+                        .foregroundColor(Color.gray)
+                }else{
+                    Text("Disabled")
+                        .foregroundColor(Color.gray)
+                }
+            }
             NavigationLink(destination: wheelPicker(value: $enviromentClass.timeout, title: "Timeout")){
                 Text("Timeout")
                 Spacer()

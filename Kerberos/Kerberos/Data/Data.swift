@@ -18,7 +18,9 @@ final class EnviromentClass: ObservableObject{
     @Published var server_list: [Session]
     @Published var selected_client: Int
     @Published var selected_server: Int
+    @Published var selected_hacker: Int
     @Published var showSheet = false
+    @Published var GTMode = false
     @Published var timeout = 1
     @Published var delay = 0
     @Published var log = EnviromentClass.defaultLog
@@ -28,7 +30,9 @@ final class EnviromentClass: ObservableObject{
         self.server_list = []
         self.selected_client = 0
         self.selected_server = 0
+        self.selected_hacker = 1
         self.add_server()
+        self.add_client()
         self.add_client()
         self.server_list[0].as.signUp(client: self.client_list[0])
     }

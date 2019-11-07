@@ -29,17 +29,17 @@ func runKerberos(servers: Session, client: Client, server_number: Int, timeout: 
     }
     do{
         add_log(0)
-        client.token1 = try servers.as.stage2(client_id: client.client_id)
+        client.token1 = try servers.as.stage1(client_id: client.client_id)
         add_log(1)
-        client.token2 = try client.stage3()
+        client.token2 = try client.stage2()
         add_log(2)
-        client.token3 = try servers.tgs.stage4(token2: client.token2)
+        client.token3 = try servers.tgs.stage3(token2: client.token2)
         add_log(3)
-        client.token4 = try client.stage5()
+        client.token4 = try client.stage4()
         add_log(4)
-        client.token5 = try servers.ss.stage6(token4: client.token4)
+        client.token5 = try servers.ss.stage5(token4: client.token4)
         add_log(5)
-        try client.stage7(timeout: timeout, delay: delay, server_number: server_number)
+        try client.stage6(timeout: timeout, delay: delay, server_number: server_number)
         add_log(6)
         client.success_server_list[server_number] = true
     }catch AS.AS_ERROR.ID_IS_NOT_SIGNED{
@@ -90,7 +90,7 @@ class Client{
         self.client_key = client_key
         self.client_iv = client_iv
     }
-    func stage3() throws -> Token2{
+    func stage2() throws -> Token2{
         if token1 == nil{
             throw CLIENT_ERROR.TOKEN1_IS_NIL
         }
@@ -104,7 +104,7 @@ class Client{
         return result
     }
     
-    func stage5() throws -> Token4{
+    func stage4() throws -> Token4{
         if token3 == nil{
             throw CLIENT_ERROR.TOKEN3_IS_NIL
         }
@@ -121,7 +121,7 @@ class Client{
         return result
     }
     
-    func stage7(timeout: Double, delay: UInt32, server_number: Int) throws{
+    func stage6(timeout: Double, delay: UInt32, server_number: Int) throws{
         if token5 == nil{
             throw CLIENT_ERROR.TOKEN5_IS_NIL
         }
@@ -154,7 +154,7 @@ class AS{
             self.client_iv_list[client.client_id] = client.client_iv
         }
     }
-    func stage2(client_id: [UInt8]) throws -> Token1{
+    func stage1(client_id: [UInt8]) throws -> Token1{
         if !self.client_id_list.contains(client_id){
             throw AS_ERROR.ID_IS_NOT_SIGNED
         }
@@ -183,7 +183,7 @@ class TGS: Server{
         case ID_IS_NOT_MATCHING
         case TOKEN2_IS_NIL
     }
-    func stage4(token2: Token2?) throws -> Token3{
+    func stage3(token2: Token2?) throws -> Token3{
         if token2 == nil{
             throw TGS_ERROR.TOKEN2_IS_NIL
         }
@@ -221,7 +221,7 @@ class SS: Server{
         self.secret_key = randomArray()
         self.secret_iv = randomArray()
     }
-    func stage6(token4: Token4?) throws -> Token5{
+    func stage5(token4: Token4?) throws -> Token5{
         if token4 == nil{
             throw SS_ERROR.TOKEN4_IS_NIL
         }
