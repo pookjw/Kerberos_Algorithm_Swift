@@ -13,6 +13,8 @@ struct ContentView: View {
     
     var navtigationBarButton: some View{
         HStack{
+            
+            // When GTMode (Golden Ticket Mode) is true(on), it shows yellow button on Navigation Bar. If not, shows blue button.
             if self.enviromentClass.GTMode{
                 Button(action: { self.enviromentClass.return_code =
                     runKerberos(
@@ -58,6 +60,7 @@ struct ContentView: View {
         }
     }
     
+    // When running algorithm was done, will show this.
     var alert: Alert{
         Alert(title: Text("Result"),
               message: self.enviromentClass.return_code == 0 ? Text("Success!") : Text("Error! Check result log!"),
@@ -73,6 +76,7 @@ struct ContentView: View {
                 LogView()
                 Spacer()
                     .frame(height: 20)
+                
                 Text("Selected Client: \(self.enviromentClass.client_list[self.enviromentClass.selected_client].client_id.toString)")
                     .font(.system(size: 15))
                 if self.enviromentClass.GTMode{
@@ -81,10 +85,12 @@ struct ContentView: View {
                 }
                 Text("Selected Server: \(self.enviromentClass.selected_server)")
                     .font(.system(size: 15))
-                NavigationLink(destination: SettingView()){
+                
+                NavigationLink(destination: SettingsView()){
                     Image(systemName: "gear")
                     Text("Settings...")
                 }
+                
                 Spacer()
                     .frame(height: 20)
             }

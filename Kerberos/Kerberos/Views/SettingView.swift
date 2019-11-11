@@ -1,5 +1,5 @@
 //
-//  SettingView.swift
+//  SettingsView.swift
 //  Kerberos
 //
 //  Created by pook on 11/3/19.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SettingView: View {
+struct SettingsView: View {
     @EnvironmentObject var enviromentClass: EnviromentClass
     @State var needRefresh: Bool = false
     
@@ -123,8 +123,8 @@ struct wheelPicker: View{
     }
 }
 
-struct SettingView_Previews: PreviewProvider {
+struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView()
+        SettingsView()
     }
 }

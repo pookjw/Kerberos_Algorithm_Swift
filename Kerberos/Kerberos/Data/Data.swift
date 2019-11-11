@@ -14,25 +14,27 @@ final class EnviromentClass: ObservableObject{
     Welcome to Kerberos Swift!
     This is a presentational data. Copyright pookjw. All rights reserved.
     Check GitHub for more information!!!
-    """
+    """ // Initial log
     @Published var client_list: [Client]
     @Published var server_list: [Session]
     @Published var selected_client: Int
     @Published var selected_server: Int
     @Published var selected_hacker: Int
-    @Published var showAlert = false
-    @Published var showSheet = false
-    @Published var return_code: Int?
-    @Published var GTMode = false
-    @Published var timeout = 1
+    @Published var showAlert = false // ContentView
+    @Published var showSheet = false // ServerView
+    @Published var return_code: Int? // Return value from Kerberos.swift - runKerberos()
+    @Published var GTMode = false // Golden Ticket Mode
+    @Published var timeout = 3
     @Published var delay = 0
-    @Published var log = EnviromentClass.defaultLog
+    @Published var log: String
     
+    // Theme for LogView. Can configure at ThemeSettingView
     @Published var log_background_color = Color.black
     @Published var log_text_color = Color.green
     @Published var log_overlay_color = Color.gray
     
     init(){
+        self.log = EnviromentClass.defaultLog
         self.client_list = []
         self.server_list = []
         self.selected_client = 0
@@ -49,7 +51,8 @@ final class EnviromentClass: ObservableObject{
         let key = randomArray()
         let iv = randomArray()
         self.client_list.append(Client(client_id: id, client_key: key, client_iv: iv))
-        //self.client_list.last!.success_server_list
+        
+        // Initialize server list on new client
         for value in 0..<self.server_list.count{
             self.client_list.last!.success_server_list[value] = false
         }
@@ -57,6 +60,7 @@ final class EnviromentClass: ObservableObject{
     
     func add_server(){
         self.server_list.append(Session())
+        // Initialize new server on all client
         for value in 0..<self.client_list.count{
             self.client_list[value].success_server_list[self.server_list.count-1] = false
         }
