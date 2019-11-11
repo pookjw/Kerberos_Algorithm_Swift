@@ -15,7 +15,7 @@ struct ServerView: View {
         HStack{
             Button(action: {self.enviromentClass.showSheet.toggle()}){
                 Spacer()
-                    .frame(width: 100)
+                    .frame(width: 50)
                 Image(systemName: "pencil")
             }
             Button(action: {self.enviromentClass.add_server()}){
@@ -66,7 +66,7 @@ struct EditView: View{
         HStack{
             Button(action: {self.enviromentClass.showSheet.toggle()}){
                 Spacer()
-                    .frame(width: 100)
+                    .frame(width: 50)
                 Image(systemName: "xmark")
             }
         }
@@ -97,7 +97,7 @@ struct SignedClientView: View{
         HStack{
             Button(action: {self.needRefresh.toggle()}){
                 Spacer()
-                    .frame(width: 100)
+                    .frame(width: 50)
                 Image(systemName: "arrow.clockwise")
             }
         }
@@ -129,7 +129,7 @@ struct ClientListView: View{
         HStack{
             Button(action: {self.needRefresh.toggle()}){
                 Spacer()
-                    .frame(width: 100)
+                    .frame(width: 50)
                 Image(systemName: "arrow.clockwise")
             }
         }

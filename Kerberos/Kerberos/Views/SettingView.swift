@@ -20,7 +20,7 @@ struct SettingView: View {
                     Image(systemName: "person")
                         .foregroundColor(Color.blue)
                         .frame(width: 30)
-                    Text("Client List")
+                    Text("Client")
                     Spacer()
                     Text(self.enviromentClass.client_list[self.enviromentClass.selected_client].client_id.toString)
                         .foregroundColor(Color.gray)
@@ -32,28 +32,11 @@ struct SettingView: View {
                     Image(systemName: "cloud")
                         .foregroundColor(Color.blue)
                         .frame(width: 30)
-                    Text("Server List")
+                    Text("Server")
                     Spacer()
                     Text("Server: \(self.enviromentClass.selected_server)")
                         .foregroundColor(Color.gray)
                 }
-            }
-            NavigationLink(destination: GTView()){
-                HStack{
-                    Image(systemName: "doc.plaintext")
-                        .foregroundColor(Color.orange)
-                        .frame(width: 30)
-                    Text("Golden Ticket")
-                    Spacer()
-                    if self.enviromentClass.GTMode{
-                        Text(self.enviromentClass.client_list[self.enviromentClass.selected_hacker].client_id.toString)
-                                .foregroundColor(Color.gray)
-                    }else{
-                        Text("(Disabled)")
-                                .foregroundColor(Color.gray)
-                    }
-                }
-                
             }
             NavigationLink(destination: wheelPicker(value: $enviromentClass.timeout, title: "Timeout")){
                 HStack{
@@ -68,7 +51,7 @@ struct SettingView: View {
             }
             NavigationLink(destination: wheelPicker(value: $enviromentClass.delay, title: "Delay")){
                 HStack{
-                    Image(systemName: "timelapse")
+                    Image(systemName: "hourglass")
                         .foregroundColor(Color.blue)
                         .frame(width: 30)
                     Text("Delay")
@@ -76,15 +59,48 @@ struct SettingView: View {
                     Text(String(self.enviromentClass.delay))
                         .foregroundColor(Color.gray)
                 }
-
+                
+            }
+            NavigationLink(destination: GTView()){
+                HStack{
+                    Image(systemName: "doc.plaintext")
+                        .foregroundColor(Color.orange)
+                        .frame(width: 30)
+                    Text("Golden Ticket")
+                    Spacer()
+                    if self.enviromentClass.GTMode{
+                        Text(self.enviromentClass.client_list[self.enviromentClass.selected_hacker].client_id.toString)
+                            .foregroundColor(Color.gray)
+                    }else{
+                        Text("(Disabled)")
+                            .foregroundColor(Color.gray)
+                    }
+                }
+                
+            }
+            NavigationLink(destination: MiscellaneousSettingsView()){
+                HStack{
+                    Image(systemName: "arkit")
+                        .foregroundColor(Color.purple)
+                        .frame(width: 30)
+                    Text("Miscellaneous")
+                }
             }
             Button(action: {self.enviromentClass.log = EnviromentClass.defaultLog}){
-                Text("Clear Log")
-                    .foregroundColor(Color.red)
+                HStack{
+                    Image(systemName: "clear")
+                        .foregroundColor(Color.red)
+                        .frame(width: 30)
+                    Text("Clear Log")
+                }
             }
             Button(action: {self.enviromentClass.unauthorizeAllSessions()}){
-                Text("Unauthorize All Sessions")
-                    .foregroundColor(Color.red)
+                HStack{
+                    Image(systemName: "minus.square")
+                        .foregroundColor(Color.red)
+                        .frame(width: 30)
+                    Text("Unauthorize All Sessions")
+                }
             }
         }
         .navigationBarTitle("Settings", displayMode: .inline)
@@ -103,7 +119,7 @@ struct wheelPicker: View{
             }
         }
         .padding(.horizontal, 99999999999.0)
-            .navigationBarTitle(title)
+        .navigationBarTitle(title)
     }
 }
 

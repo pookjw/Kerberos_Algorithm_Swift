@@ -18,16 +18,16 @@ struct LogView: View {
                 Spacer()
                     .frame(width: 7)
                 Text(self.enviromentClass.log)
-                    .foregroundColor(Color.green)
+                    .foregroundColor(self.enviromentClass.log_text_color)
                     .multilineTextAlignment(.leading)
                 Spacer()
             }
             Spacer()
         }
-            .background(Color.black)
+            .background(self.enviromentClass.log_background_color)
             .overlay(
                 RoundedRectangle(cornerRadius: 6)
-                    .stroke(Color.gray, lineWidth: 6)
+                    .stroke(self.enviromentClass.log_overlay_color, lineWidth: 6)
             )
     }
 }

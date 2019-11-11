@@ -6,6 +6,7 @@
 //  Copyright © 2019 pookjw. All rights reserved.
 //
 
+import SwiftUI
 import Foundation
 
 final class EnviromentClass: ObservableObject{
@@ -26,6 +27,10 @@ final class EnviromentClass: ObservableObject{
     @Published var timeout = 1
     @Published var delay = 0
     @Published var log = EnviromentClass.defaultLog
+    
+    @Published var log_background_color = Color.black
+    @Published var log_text_color = Color.green
+    @Published var log_overlay_color = Color.gray
     
     init(){
         self.client_list = []

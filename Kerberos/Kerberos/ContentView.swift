@@ -74,10 +74,13 @@ struct ContentView: View {
                 Spacer()
                     .frame(height: 20)
                 Text("Selected Client: \(self.enviromentClass.client_list[self.enviromentClass.selected_client].client_id.toString)")
+                    .font(.system(size: 15))
                 if self.enviromentClass.GTMode{
                     Text("Selected Hacker: \(self.enviromentClass.client_list[self.enviromentClass.selected_hacker].client_id.toString)")
+                        .font(.system(size: 15))
                 }
                 Text("Selected Server: \(self.enviromentClass.selected_server)")
+                    .font(.system(size: 15))
                 NavigationLink(destination: SettingView()){
                     Image(systemName: "gear")
                     Text("Settings...")
