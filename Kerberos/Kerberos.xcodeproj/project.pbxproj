@@ -26,6 +26,7 @@
 		F34A90C523799E4B00D62ABD /* ThemeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34A90C423799E4B00D62ABD /* ThemeSettingView.swift */; };
 		F34BE30D237A5C5B000914F4 /* StepListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34BE30C237A5C5B000914F4 /* StepListView.swift */; };
 		F34BE30F237A5C79000914F4 /* MiscellaneousSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34BE30E237A5C79000914F4 /* MiscellaneousSettingView.swift */; };
+		F36F755B237AFF58001194FF /* WheelPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F755A237AFF58001194FF /* WheelPickerView.swift */; };
 		F3A449232373A29D00F26B0F /* GTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A449222373A29D00F26B0F /* GTView.swift */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		F34A90C423799E4B00D62ABD /* ThemeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThemeSettingView.swift; path = Kerberos/ThemeSettingView.swift; sourceTree = SOURCE_ROOT; };
 		F34BE30C237A5C5B000914F4 /* StepListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepListView.swift; sourceTree = "<group>"; };
 		F34BE30E237A5C79000914F4 /* MiscellaneousSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiscellaneousSettingView.swift; sourceTree = "<group>"; };
+		F36F755A237AFF58001194FF /* WheelPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelPickerView.swift; sourceTree = "<group>"; };
 		F3A449222373A29D00F26B0F /* GTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GTView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -215,6 +217,7 @@
 				F3A449222373A29D00F26B0F /* GTView.swift */,
 				F34A90C423799E4B00D62ABD /* ThemeSettingView.swift */,
 				F34BE30C237A5C5B000914F4 /* StepListView.swift */,
+				F36F755A237AFF58001194FF /* WheelPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				F32A125D236E9CB300B79507 /* SceneDelegate.swift in Sources */,
 				F32A12B7236EA9B500B79507 /* SettingView.swift in Sources */,
 				F34A90C523799E4B00D62ABD /* ThemeSettingView.swift in Sources */,
+				F36F755B237AFF58001194FF /* WheelPickerView.swift in Sources */,
 				F34BE30D237A5C5B000914F4 /* StepListView.swift in Sources */,
 				F32A12D3236EC4B400B79507 /* ServerView.swift in Sources */,
 				F32A125F236E9CB300B79507 /* ContentView.swift in Sources */,

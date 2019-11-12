@@ -18,6 +18,7 @@ struct LogView: View {
                 Spacer()
                     .frame(width: 7)
                 Text(self.enviromentClass.log)
+                    .lineSpacing(CGFloat(self.enviromentClass.log_line_spacing))
                     .foregroundColor(self.enviromentClass.log_text_color)
                     .multilineTextAlignment(.leading)
                 Spacer()

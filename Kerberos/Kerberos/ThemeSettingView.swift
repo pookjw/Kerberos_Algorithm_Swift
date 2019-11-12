@@ -51,6 +51,15 @@ struct ThemeSettingView: View {
                             .frame(width: 30)
                     }
                 }
+                NavigationLink(destination: WheelPickerView(value: $enviromentClass.log_line_spacing, title: "Spacing", showLogView: true)){
+                    Image(systemName: "text.cursor")
+                        .foregroundColor(Color.blue)
+                        .frame(width: 30)
+                    Text("Log Line Spacing")
+                    Spacer()
+                    Text("Spacing: \(self.enviromentClass.log_line_spacing)")
+                        .foregroundColor(Color.gray)
+                }
             }
         }
         .navigationBarTitle("Theme")

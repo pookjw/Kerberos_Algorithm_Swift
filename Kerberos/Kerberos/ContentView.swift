@@ -82,7 +82,7 @@ struct ContentView: View {
                             delay: UInt32(self.enviromentClass.delay)
                             )
                         )
-                            //.frame(height: 250)
+                            .frame(height: 200)
                     }else{
                         StepListView(kerberos:  Kerberos(
                             servers: self.enviromentClass.server_list[self.enviromentClass.selected_server],
@@ -93,7 +93,7 @@ struct ContentView: View {
                             delay: UInt32(self.enviromentClass.delay)
                             )
                         )
-                            //.frame(height: 250)
+                            .frame(height: 200)
                     }
                 }
                 Spacer()

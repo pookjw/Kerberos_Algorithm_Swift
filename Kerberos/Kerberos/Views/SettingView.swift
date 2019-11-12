@@ -38,7 +38,7 @@ struct SettingsView: View {
                         .foregroundColor(Color.gray)
                 }
             }
-            NavigationLink(destination: wheelPicker(value: $enviromentClass.timeout, title: "Timeout")){
+            NavigationLink(destination: WheelPickerView(value: $enviromentClass.timeout, title: "Timeout", showLogView: false)){
                 HStack{
                     Image(systemName: "timer")
                         .foregroundColor(Color.blue)
@@ -49,7 +49,7 @@ struct SettingsView: View {
                         .foregroundColor(Color.gray)
                 }
             }
-            NavigationLink(destination: wheelPicker(value: $enviromentClass.delay, title: "Delay")){
+            NavigationLink(destination: WheelPickerView(value: $enviromentClass.delay, title: "Delay", showLogView: false)){
                 HStack{
                     Image(systemName: "hourglass")
                         .foregroundColor(Color.blue)
@@ -109,22 +109,6 @@ struct SettingsView: View {
             }
         }
         .navigationBarTitle("Settings", displayMode: .inline)
-    }
-}
-
-struct wheelPicker: View{
-    @Binding var value: Int
-    var title: String
-    
-    var body: some View{
-        Picker(selection: $value, label:
-        Text("")){
-            ForEach(0...120, id: \.self){ number in
-                Text(String(number)).tag(number)
-            }
-        }
-        .padding(.horizontal, 99999999999.0)
-        .navigationBarTitle(title)
     }
 }
 

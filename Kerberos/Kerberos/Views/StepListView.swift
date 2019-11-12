@@ -194,7 +194,7 @@ struct StepListView: View {
                             Text("Clear All Tokens")
                             Spacer()
                             Image(systemName: "play.circle")
-                                .foregroundColor(Color.blue)
+                                .foregroundColor(Color.orange)
                                 .scaleEffect(1.5)
                         }
                     }

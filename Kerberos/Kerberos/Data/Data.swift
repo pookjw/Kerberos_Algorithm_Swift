@@ -32,8 +32,9 @@ final class EnviromentClass: ObservableObject{
     @Published var log_background_color = Color.black
     @Published var log_text_color = Color.green
     @Published var log_overlay_color = Color.gray
+    @Published var log_line_spacing = 0
     
-    @Published var SBSMode = false
+    @Published var SBSMode = true
     
     init(){
         self.log = EnviromentClass.defaultLog
