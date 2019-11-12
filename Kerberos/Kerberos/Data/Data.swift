@@ -33,6 +33,8 @@ final class EnviromentClass: ObservableObject{
     @Published var log_text_color = Color.green
     @Published var log_overlay_color = Color.gray
     
+    @Published var SBSMode = false
+    
     init(){
         self.log = EnviromentClass.defaultLog
         self.client_list = []

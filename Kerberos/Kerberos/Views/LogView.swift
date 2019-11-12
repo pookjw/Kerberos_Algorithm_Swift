@@ -29,6 +29,7 @@ struct LogView: View {
                 RoundedRectangle(cornerRadius: 6)
                     .stroke(self.enviromentClass.log_overlay_color, lineWidth: 6)
             )
+            .padding(.all, 10.0)
     }
 }
 

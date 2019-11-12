@@ -54,6 +54,22 @@ This is called on Token5.
 
 ## How to use this
 
+### Table
+
+- [Creating new Client](#creating-new-client)
+
+- [Creating new Server](#creating-new-server)
+
+- [Signing up Client to Server](#signing-up-client-to-server)
+
+- [Select Client and Server to run algorithm](#select-client-and-server-to-run-algorithm)
+
+- [Adjust Timeout and Delay value](#adjust-timeout-and-delay-value)
+
+- [Running Algorithm](#running-algorithm)
+
+- [Running Golden Ticket Exploit](#running-golden-ticket-exploit)
+
 ### Creating new Client
 
 ![3](https://live.staticflickr.com/65535/49027339926_3c0ebef5df_o.png)

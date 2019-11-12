@@ -66,7 +66,6 @@ struct ColorList: View{
     var body: some View{
         VStack{
             LogView()
-                .padding([.top, .leading, .trailing], 10.0)
             List{
                 ForEach(ColorList.keys.sorted(), id: \.self){ value in
                     Button(action: {self.color = self.ColorList[value]!}){

@@ -9,8 +9,23 @@
 import Foundation
 import CryptoSwift
 
-func runKerberos(servers: Session, client: Client, hacker: Client? = nil, server_number: Int, timeout: Double, delay: UInt32, log: inout String) -> Int{
-    func add_log(_ number: Int){
+class Kerberos{
+    let servers: Session
+    let client: Client
+    let hacker: Client?
+    let server_number: Int
+    let timeout: Double
+    let delay: UInt32
+    init(servers: Session, client: Client, hacker: Client? = nil, server_number: Int, timeout: Double, delay: UInt32){
+        self.servers = servers
+        self.client = client
+        self.hacker = hacker
+        self.server_number = server_number
+        self.timeout = timeout
+        self.delay = delay
+    }
+    
+    func add_log(_ number: Int, log: inout String){
         let list = [
             "- Requesting token1 to Authentication Server...", // 0
             "- Creating token2...", // 1
@@ -27,68 +42,213 @@ func runKerberos(servers: Session, client: Client, hacker: Client? = nil, server
         print(list[number])
         log += "\n\(list[number])"
     }
-    func add_log(text: String){
+    func add_log(text: String, log: inout String){
         print(text)
         log += "\n\(text)"
     }
-    
-    add_log(text: "")
-    add_log(text: "Client: \(client.client_id.toString)")
-    if hacker != nil{
-        add_log(text: "Hacker: \(hacker!.client_id.toString)")
-    }
-    add_log(text: "Server: \(server_number)")
-    
-    do{
-        if hacker == nil{
-            add_log(0)
-            client.token1 = try servers.as.stage1(client_id: client.client_id)
-            add_log(1)
-            client.token2 = try client.stage2()
-            add_log(2)
-            client.token3 = try servers.tgs.stage3(token2: client.token2)
-            add_log(3)
-            client.token4 = try client.stage4()
-            add_log(4)
-            client.token5 = try servers.ss.stage5(token4: client.token4)
-            add_log(5)
-            try client.stage6(timeout: timeout, delay: delay)
-            add_log(6)
-            client.success_server_list[server_number] = true
-        }else{
-            add_log(7)
-            hacker!.token2 = try hacker!.gt_stage_2(fake_client_id: client.client_id, tgs_secret_key: servers.tgs.secret_key, tgs_secret_iv: servers.tgs.secret_iv)
-            add_log(2)
-            hacker!.token3 = try servers.tgs.stage3(token2: hacker!.token2)
-            add_log(8)
-            hacker!.token4 = try hacker!.gt_stage_4(fake_client_id: client.client_id)
-            add_log(4)
-            hacker!.token5 = try servers.ss.stage5(token4: hacker!.token4)
-            add_log(5)
-            try hacker!.stage6(timeout: timeout, delay: delay)
-            add_log(6)
-            hacker!.success_server_list[server_number] = true
+    func clear_all(){
+        client.token1 = nil
+        client.token2 = nil
+        client.token3 = nil
+        client.token4 = nil
+        client.token5 = nil
+        if hacker != nil{
+            hacker!.token1 = nil
+            hacker!.token2 = nil
+            hacker!.token3 = nil
+            hacker!.token4 = nil
+            hacker!.token5 = nil
         }
-    }catch AS.AS_ERROR.ID_IS_NOT_SIGNED{
-        add_log(text: "- Error: Client is not signed to Server!")
-        client.success_server_list[server_number] = false
-        return 1
-    }catch Client.CLIENT_ERROR.TIMEOUT{
-        add_log(text: "- Error: Timeout!")
-        client.success_server_list[server_number] = false
-        return 1
-    }catch let error as NSError {
-        print("- \(error)")
-        log += "\n- \(error)"
-        client.success_server_list[server_number] = false
-        return 1
     }
-    client.token1 = nil
-    client.token2 = nil
-    client.token3 = nil
-    client.token4 = nil
-    client.token5 = nil
-    return 0
+    
+    func stage1(log: inout String) -> Int{
+        add_log(text: "", log: &log)
+        add_log(text: "Client: \(client.client_id.toString)", log: &log)
+        add_log(text: "Server: \(server_number)", log: &log)
+        
+        do{
+            add_log(0, log: &log)
+            client.token1 = try servers.as.stage1(client_id: client.client_id)
+        } catch AS.AS_ERROR.ID_IS_NOT_SIGNED{
+            add_log(text: "- Error: Client is not signed to Server!", log: &log)
+            client.success_server_list[server_number] = false
+            clear_all()
+            return 1
+        } catch let error as NSError {
+            add_log(text: "Error: \(error)", log: &log)
+            clear_all()
+            return 1
+        }
+        return 0
+    }
+    
+    func stage2(log: inout String) -> Int{
+        do{
+            add_log(1, log: &log)
+            client.token2 = try client.stage2()
+        } catch let error as NSError {
+            add_log(text: "Error: \(error)", log: &log)
+            client.success_server_list[server_number] = false
+            clear_all()
+            return 1
+        }
+        return 0
+    }
+    
+    func stage3(log: inout String) -> Int{
+        do{
+            add_log(2, log: &log)
+            client.token3 = try servers.tgs.stage3(token2: client.token2)
+        } catch let error as NSError {
+            add_log(text: "Error: \(error)", log: &log)
+            client.success_server_list[server_number] = false
+            clear_all()
+            return 1
+        }
+        return 0
+    }
+    
+    func stage4(log: inout String) -> Int{
+        do{
+            add_log(3, log: &log)
+            client.token4 = try client.stage4()
+        } catch let error as NSError {
+            add_log(text: "Error: \(error)", log: &log)
+            client.success_server_list[server_number] = false
+            clear_all()
+            return 1
+        }
+        return 0
+    }
+    
+    func stage5(log: inout String) -> Int{
+        do{
+            add_log(4, log: &log)
+            client.token5 = try servers.ss.stage5(token4: client.token4)
+        } catch let error as NSError {
+            add_log(text: "Error: \(error)", log: &log)
+            client.success_server_list[server_number] = false
+            clear_all()
+            return 1
+        }
+        return 0
+    }
+    
+    func stage6(log: inout String) -> Int{
+        do{
+            add_log(5, log: &log)
+            try client.stage6(timeout: timeout, delay: delay)
+            add_log(6, log: &log)
+            client.success_server_list[server_number] = true
+        } catch Client.CLIENT_ERROR.TIMEOUT{
+            add_log(text: "- Error: Timeout!", log: &log)
+            client.success_server_list[server_number] = false
+            clear_all()
+            return 1
+        } catch let error as NSError {
+            add_log(text: "Error: \(error)", log: &log)
+            client.success_server_list[server_number] = false
+            clear_all()
+            return 1
+        }
+        return 0
+    }
+    
+    func gt_stage1(log: inout String) -> Int{
+        add_log(text: "", log: &log)
+        add_log(text: "Client: \(client.client_id.toString)", log: &log)
+        add_log(text: "Hacker: \(hacker!.client_id.toString)", log: &log)
+        add_log(text: "Server: \(server_number)", log: &log)
+        
+        do{
+            add_log(7, log: &log)
+            hacker!.token2 = try hacker!.gt_stage_2(fake_client_id: client.client_id, tgs_secret_key: servers.tgs.secret_key, tgs_secret_iv: servers.tgs.secret_iv)
+        } catch let error as NSError {
+            add_log(text: "Error: \(error)", log: &log)
+            client.success_server_list[server_number] = false
+            clear_all()
+            return 1
+        }
+        return 0
+    }
+    
+    func gt_stage2(log: inout String) -> Int{
+        do{
+            add_log(2, log: &log)
+            hacker!.token3 = try servers.tgs.stage3(token2: hacker!.token2)
+        } catch let error as NSError {
+            add_log(text: "Error: \(error)", log: &log)
+            client.success_server_list[server_number] = false
+            clear_all()
+            return 1
+        }
+        return 0
+    }
+    
+    func gt_stage3(log: inout String) -> Int{
+        do{
+            add_log(8, log: &log)
+            hacker!.token4 = try hacker!.gt_stage_4(fake_client_id: client.client_id)
+        } catch let error as NSError {
+            add_log(text: "Error: \(error)", log: &log)
+            client.success_server_list[server_number] = false
+            clear_all()
+            return 1
+        }
+        return 0
+    }
+    
+    func gt_stage4(log: inout String) -> Int{
+        do{
+            add_log(4, log: &log)
+            hacker!.token5 = try servers.ss.stage5(token4: hacker!.token4)
+        } catch let error as NSError {
+            add_log(text: "Error: \(error)", log: &log)
+            client.success_server_list[server_number] = false
+            clear_all()
+            return 1
+        }
+        return 0
+    }
+    
+    func gt_stage5(log: inout String) -> Int{
+        do{
+            add_log(5, log: &log)
+            try hacker!.stage6(timeout: timeout, delay: delay)
+            add_log(6, log: &log)
+            hacker!.success_server_list[server_number] = true
+        } catch Client.CLIENT_ERROR.TIMEOUT{
+            add_log(text: "- Error: Timeout!", log: &log)
+            client.success_server_list[server_number] = false
+            clear_all()
+            return 1
+        } catch let error as NSError {
+            add_log(text: "Error: \(error)", log: &log)
+            client.success_server_list[server_number] = false
+            clear_all()
+            return 1
+        }
+        return 0
+    }
+    
+    func run_all(log: inout String) -> Int{
+        if hacker == nil{ // If GT_Mode is off
+            if stage1(log: &log) == 1 { return 1 }
+            if stage2(log: &log) == 1 { return 1 }
+            if stage3(log: &log) == 1 { return 1 }
+            if stage4(log: &log) == 1 { return 1 }
+            if stage5(log: &log) == 1 { return 1 }
+            if stage6(log: &log) == 1 { return 1 }
+        } else {
+            if gt_stage1(log: &log) == 1 { return 1 }
+            if gt_stage2(log: &log) == 1 { return 1 }
+            if gt_stage3(log: &log) == 1 { return 1 }
+            if gt_stage4(log: &log) == 1 { return 1 }
+            if gt_stage5(log: &log) == 1 { return 1 }
+        }
+        clear_all()
+        return 0
+    }
 }
 
 protocol Server: AnyObject{

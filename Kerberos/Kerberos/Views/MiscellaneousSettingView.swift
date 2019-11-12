@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct MiscellaneousSettingsView: View {
+    @EnvironmentObject var enviromentClass: EnviromentClass
     var body: some View {
         List{
             NavigationLink(destination: ThemeSettingView()){

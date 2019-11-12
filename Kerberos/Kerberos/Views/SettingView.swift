@@ -59,7 +59,12 @@ struct SettingsView: View {
                     Text(String(self.enviromentClass.delay))
                         .foregroundColor(Color.gray)
                 }
-                
+            }
+            Toggle(isOn: $enviromentClass.SBSMode){
+                Image(systemName: "playpause")
+                    .foregroundColor(Color.blue)
+                    .frame(width: 30)
+                Text("Step By Step")
             }
             NavigationLink(destination: GTView()){
                 HStack{
@@ -80,7 +85,7 @@ struct SettingsView: View {
             }
             NavigationLink(destination: MiscellaneousSettingsView()){
                 HStack{
-                    Image(systemName: "arkit")
+                    Image(systemName: "cube.box")
                         .foregroundColor(Color.purple)
                         .frame(width: 30)
                     Text("Miscellaneous")
