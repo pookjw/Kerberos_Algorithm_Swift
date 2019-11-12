@@ -14,9 +14,9 @@ More Details can check at [Kerberos (protocol)](https://en.wikipedia.org/wiki/Ke
 
 1. Client sends ID to AS. AS checks that Client is signed up. AS gives:
 
-- messageA : TGS Session Key encrypted with the client secret key
+- messageA : TGS Session Key encrypted with the Client Secret Key
 
-- messageB : TGT (client ID, TGS session key) encrypted with the TGS secret key
+- messageB : TGT (client ID, TGS session key) encrypted with the TGS Secret Key
 
 These are combined on Token1.
 
@@ -24,15 +24,15 @@ These are combined on Token1.
 
 - messageC : messageB
 
-- messageD : Authenticator (client ID) encrypted with the TGS session key (from messageA)
+- messageD : Authenticator (Client ID) encrypted with the TGS Session Key (from messageA)
 
 These are combined on Token2. Now Client knows TGS Session Key from messageA.
 
-3. The TGS retrieves messageC and decrypts using TGS secret key and gets TGS session key. Using this key, the TGS decrypts messageD and compare client ID from C and D. If they match,
+3. The TGS retrieves messageC and decrypts using TGS Secret key and gets TGS Session Key. Using this key, the TGS decrypts messageD and compare Client ID from C and D. If they match,
 
-- messageE : Client-to-server ticket (client ID, Server Session Key) encrypted using the Server secret key
+- messageE : Client-to-server ticket (Client ID, Server Session Key) encrypted using the Server Secret Key
 
-- messageF : Server Session Key encypted using TGS Session key (from messageC)
+- messageF : Server Session Key encypted using TGS Session Key (from messageC)
 
 These are combined on Token3.
 
@@ -40,11 +40,11 @@ These are combined on Token3.
 
 - messageE : messageE from the previous step
 
-- messageG : another Authenticator (client ID) encrypted using Server Seesion key 
+- messageG : another Authenticator (Client ID) encrypted using Server Session key 
  
  These are combined on Token4.
  
-5. SS decrypts messageE using Server secret key and gets Server Session Key. Using this Server Session Key, SS decrypts messageG and compare client ID. If match,
+5. SS decrypts messageE using Server secret key and gets Server Session Key. Using this Server Session Key, SS decrypts messageG and compare Client ID. If match,
 
 - messageH : timestamp encrypted using Server Session Key.
 
