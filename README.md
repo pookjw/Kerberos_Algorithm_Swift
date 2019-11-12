@@ -6,6 +6,8 @@ Not a real Kerberos. It doesn't communicate with actual servers. Just communicat
 
 Used AES-128 with [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift). Coded with SwiftUI.
 
+Supports iOS (not for iPadOS yet), macOS (Catalyst Project).
+
 ## Fundamental Algorithm
 
 More Details can check at [Kerberos (protocol)](https://en.wikipedia.org/wiki/Kerberos_(protocol))
@@ -56,6 +58,8 @@ This is called on Token5.
 
 ### Table
 
+- [Building Project](#building-project)
+
 - [Creating a new Client](#creating-a-new-client)
 
 - [Creating a new Server](#creating-a-new-server)
@@ -73,6 +77,22 @@ This is called on Token5.
 - [Running Algorithm Step By Step](#running-algorithm-step-by-step)
 
 - [Change LogView Theme](#change-logView-theme)
+
+### Buidling Project
+
+1. Create a new Xcode Workspace.
+
+2. Add Kerberos (this project) and [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift) references to Workspace like below.
+
+![9](https://live.staticflickr.com/65535/49053155291_048f5fd13b_o.png)
+
+3. Set Signing with your Apple Developer ID.
+
+4. Embed CryptoSwift.framework to Kerberos like below.
+
+![10](https://live.staticflickr.com/65535/49053157401_ed62c19caf_o.png)
+
+5. Build and Run!
 
 ### Creating a new Client
 
@@ -150,6 +170,8 @@ Go to **Settings (gear icon) → Miscellaneous →  Theme Setting**
 
 - ~~Add LogView~~ Done
 
-- ~~More error handling~~ Done
+- More error handling
+
+- Rich comments
 
 - Multi Encryption Algorithm
