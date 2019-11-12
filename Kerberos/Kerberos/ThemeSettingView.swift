@@ -13,7 +13,7 @@ struct ThemeSettingView: View {
     var body: some View {
         VStack{
             LogView()
-                .padding([.top, .leading, .trailing], 10.0)
+                //.padding([.top, .leading, .trailing], 10.0)
             List{
                 NavigationLink(destination: ColorList(color: $enviromentClass.log_background_color, title: "Background")){
                     HStack{
@@ -55,7 +55,7 @@ struct ThemeSettingView: View {
                     Image(systemName: "text.cursor")
                         .foregroundColor(Color.blue)
                         .frame(width: 30)
-                    Text("Log Line Spacing")
+                    Text("Line Spacing")
                     Spacer()
                     Text("Spacing: \(self.enviromentClass.log_line_spacing)")
                         .foregroundColor(Color.gray)

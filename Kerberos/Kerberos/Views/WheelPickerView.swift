@@ -18,6 +18,7 @@ struct WheelPickerView: View{
         VStack{
             if self.showLogView{
                 LogView()
+                    .padding(.horizontal, 10.0)
             }
             HStack{
                 Spacer()
@@ -32,8 +33,8 @@ struct WheelPickerView: View{
             }
                 //.offset(x: -100)
                 //.padding(.horizontal, 99999999999.0)
-                .navigationBarTitle(title)
         }
+        .navigationBarTitle(title)
     }
 }
 

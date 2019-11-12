@@ -100,10 +100,10 @@ struct ContentView: View {
                     .frame(height: 10)
                 
                 if self.enviromentClass.GTMode{
-                    Text("GT Mode: (On)")
+                    Text("GT Mode: (Enabled)")
                         .font(.system(size: 15))
                 }else{
-                    Text("GT Mode: (Off)")
+                    Text("GT Mode: (Disabled)")
                         .font(.system(size: 15))
                 }
                 Text("Selected Client: \(self.enviromentClass.client_list[self.enviromentClass.selected_client].client_id.toString)")
