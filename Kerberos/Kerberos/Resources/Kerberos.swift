@@ -72,11 +72,9 @@ class Kerberos{
         } catch AS.AS_ERROR.ID_IS_NOT_SIGNED{
             add_log(text: "- Error: Client is not signed to Server!", log: &log)
             client.success_server_list[server_number] = false
-            clear_all()
             return 1
         } catch let error as NSError {
             add_log(text: "Error: \(error)", log: &log)
-            clear_all()
             return 1
         }
         return 0
@@ -89,7 +87,6 @@ class Kerberos{
         } catch let error as NSError {
             add_log(text: "Error: \(error)", log: &log)
             client.success_server_list[server_number] = false
-            clear_all()
             return 1
         }
         return 0
@@ -102,7 +99,6 @@ class Kerberos{
         } catch let error as NSError {
             add_log(text: "Error: \(error)", log: &log)
             client.success_server_list[server_number] = false
-            clear_all()
             return 1
         }
         return 0
@@ -115,7 +111,6 @@ class Kerberos{
         } catch let error as NSError {
             add_log(text: "Error: \(error)", log: &log)
             client.success_server_list[server_number] = false
-            clear_all()
             return 1
         }
         return 0
@@ -128,7 +123,6 @@ class Kerberos{
         } catch let error as NSError {
             add_log(text: "Error: \(error)", log: &log)
             client.success_server_list[server_number] = false
-            clear_all()
             return 1
         }
         return 0
@@ -143,12 +137,10 @@ class Kerberos{
         } catch Client.CLIENT_ERROR.TIMEOUT{
             add_log(text: "- Error: Timeout!", log: &log)
             client.success_server_list[server_number] = false
-            clear_all()
             return 1
         } catch let error as NSError {
             add_log(text: "Error: \(error)", log: &log)
             client.success_server_list[server_number] = false
-            clear_all()
             return 1
         }
         return 0
@@ -166,7 +158,6 @@ class Kerberos{
         } catch let error as NSError {
             add_log(text: "Error: \(error)", log: &log)
             client.success_server_list[server_number] = false
-            clear_all()
             return 1
         }
         return 0
@@ -179,7 +170,6 @@ class Kerberos{
         } catch let error as NSError {
             add_log(text: "Error: \(error)", log: &log)
             client.success_server_list[server_number] = false
-            clear_all()
             return 1
         }
         return 0
@@ -192,7 +182,6 @@ class Kerberos{
         } catch let error as NSError {
             add_log(text: "Error: \(error)", log: &log)
             client.success_server_list[server_number] = false
-            clear_all()
             return 1
         }
         return 0
@@ -205,7 +194,6 @@ class Kerberos{
         } catch let error as NSError {
             add_log(text: "Error: \(error)", log: &log)
             client.success_server_list[server_number] = false
-            clear_all()
             return 1
         }
         return 0
@@ -220,12 +208,10 @@ class Kerberos{
         } catch Client.CLIENT_ERROR.TIMEOUT{
             add_log(text: "- Error: Timeout!", log: &log)
             client.success_server_list[server_number] = false
-            clear_all()
             return 1
         } catch let error as NSError {
             add_log(text: "Error: \(error)", log: &log)
             client.success_server_list[server_number] = false
-            clear_all()
             return 1
         }
         return 0
@@ -233,21 +219,20 @@ class Kerberos{
     
     func run_all(log: inout String) -> Int{
         if hacker == nil{ // If GT_Mode is off
-            if stage1(log: &log) == 1 { return 1 }
-            if stage2(log: &log) == 1 { return 1 }
-            if stage3(log: &log) == 1 { return 1 }
-            if stage4(log: &log) == 1 { return 1 }
-            if stage5(log: &log) == 1 { return 1 }
-            if stage6(log: &log) == 1 { return 1 }
+            if stage1(log: &log) == 1 { clear_all(); return 1 }
+            if stage2(log: &log) == 1 { clear_all(); return 1 }
+            if stage3(log: &log) == 1 { clear_all(); return 1 }
+            if stage4(log: &log) == 1 { clear_all(); return 1 }
+            if stage5(log: &log) == 1 { clear_all(); return 1 }
+            if stage6(log: &log) == 1 { clear_all(); return 1 }
         } else {
-            if gt_stage1(log: &log) == 1 { return 1 }
-            if gt_stage2(log: &log) == 1 { return 1 }
-            if gt_stage3(log: &log) == 1 { return 1 }
-            if gt_stage4(log: &log) == 1 { return 1 }
-            if gt_stage5(log: &log) == 1 { return 1 }
+            if gt_stage1(log: &log) == 1 { clear_all(); return 1 }
+            if gt_stage2(log: &log) == 1 { clear_all(); return 1 }
+            if gt_stage3(log: &log) == 1 { clear_all(); return 1 }
+            if gt_stage4(log: &log) == 1 { clear_all(); return 1 }
+            if gt_stage5(log: &log) == 1 { clear_all(); return 1 }
         }
-        clear_all()
-        return 0
+        clear_all(); return 0
     }
 }
 
