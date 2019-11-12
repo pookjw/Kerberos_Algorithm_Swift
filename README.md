@@ -1,6 +1,6 @@
 # Kerberos_Algorithm_Swift
 
-![1](https://live.staticflickr.com/65535/49027543837_f2072eef5a_o.png)
+![1](https://live.staticflickr.com/65535/49052608098_113f832194_o.png)
 
 Not a real Kerberos. It doesn't communicate with actual servers. Just communicates with Swift object with Kerberos algorithm locally.
 
@@ -56,9 +56,9 @@ This is called on Token5.
 
 ### Table
 
-- [Creating new Client](#creating-new-client)
+- [Creating a new Client](#creating-a-new-client)
 
-- [Creating new Server](#creating-new-server)
+- [Creating a new Server](#creating-a-new-server)
 
 - [Signing up Client to Server](#signing-up-client-to-server)
 
@@ -70,13 +70,17 @@ This is called on Token5.
 
 - [Running Golden Ticket Exploit](#running-golden-ticket-exploit)
 
-### Creating new Client
+- [Running Algorithm Step By Step](#running-algorithm-step-by-step)
+
+- [Change LogView Theme](#change-logView-theme)
+
+### Creating a new Client
 
 ![3](https://live.staticflickr.com/65535/49027339926_3c0ebef5df_o.png)
 
 Go to **Settings (gear icon) → Client List → Plus Button (located on right top)**
 
-### Creating new Server
+### Creating a new Server
 
 ![2](https://live.staticflickr.com/65535/49026826763_321fc957c6_o.png)
 
@@ -120,9 +124,21 @@ Success!
 
 ![6](https://live.staticflickr.com/65535/49027566752_c45e020193_o.png)
 
-Go to **Settings (gear icon) → Golden Ticket -> Enable Exploit Mode**
+Enable **Settings (gear icon) → Golden Ticket → Enable Exploit Mode**
 
 Select Hacker to use Exploit Mode. Hacker, who is not signed up to selected Server, can login to selected Server using Kerberos Golden Ticket Exploit with selected Client ID, which is signed up to selected Server.
+
+### Running Algorithm Step By Step
+
+![7](https://live.staticflickr.com/65535/49053339987_d73435f460_o.png)
+
+Toggle **Settings (gear icon) → Step By Step**
+
+### Change LogView Theme
+
+![8](https://live.staticflickr.com/65535/49053349852_b3bd1c7b8f_o.png)
+
+Go to **Settings (gear icon) → Miscellaneous →  Theme Setting**
 
 ## To Do
 
