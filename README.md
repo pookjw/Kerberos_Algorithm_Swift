@@ -156,7 +156,7 @@ Toggle **Settings (gear icon) → Step By Step**
 
 ![8](https://live.staticflickr.com/65535/49053349852_b3bd1c7b8f_o.png)
 
-Go to **Settings (gear icon) → Miscellaneous →  Theme Setting**
+Go to **Settings (gear icon) → Miscellaneous →  Theme Settings**
 
 ## To Do
 

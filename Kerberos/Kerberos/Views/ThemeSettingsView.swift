@@ -1,5 +1,5 @@
 //
-//  ThemeSettingView.swift
+//  ThemeSettingsView.swift
 //  Kerberos
 //
 //  Created by pook on 11/11/19.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ThemeSettingView: View {
+struct ThemeSettingsView: View {
     @EnvironmentObject var enviromentClass: EnviromentClass
     var body: some View {
         VStack{
@@ -100,8 +100,8 @@ struct ColorList: View{
     }
 }
 
-struct ThemeSettingView_Previews: PreviewProvider {
+struct ThemeSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ThemeSettingView()
+        ThemeSettingsView()
     }
 }

@@ -12,11 +12,11 @@ struct MiscellaneousSettingsView: View {
     @EnvironmentObject var enviromentClass: EnviromentClass
     var body: some View {
         List{
-            NavigationLink(destination: ThemeSettingView()){
+            NavigationLink(destination: ThemeSettingsView()){
                 Image(systemName: "paintbrush")
                     .foregroundColor(Color.blue)
                     .frame(width: 30)
-                Text("Theme Setting")
+                Text("Theme Settings")
             }
             .navigationBarTitle("Miscellaneous")
         }
