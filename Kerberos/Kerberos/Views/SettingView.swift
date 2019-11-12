@@ -119,7 +119,7 @@ struct wheelPicker: View{
     var body: some View{
         Picker(selection: $value, label:
         Text("")){
-            ForEach(0...10, id: \.self){ number in
+            ForEach(0...120, id: \.self){ number in
                 Text(String(number)).tag(number)
             }
         }

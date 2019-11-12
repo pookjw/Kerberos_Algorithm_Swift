@@ -98,6 +98,21 @@ struct StepListView: View {
                         }
                     }
                 }
+                HStack{
+                    Button(action: {
+                        self.kerberos.clear_all()
+                        self.enviromentClass.return_code = 0
+                        self.enviromentClass.showAlert = true
+                    }){
+                        HStack{
+                            Text("Clear All Tokens")
+                            Spacer()
+                            Image(systemName: "play.circle")
+                                .foregroundColor(Color.blue)
+                                .scaleEffect(1.5)
+                        }
+                    }
+                }
             }else{
                 HStack{
                     Button(action: {
@@ -168,7 +183,21 @@ struct StepListView: View {
                                 .scaleEffect(1.5)
                         }
                     }
-                    
+                }
+                HStack{
+                    Button(action: {
+                        self.kerberos.clear_all()
+                        self.enviromentClass.return_code = 0
+                        self.enviromentClass.showAlert = true
+                    }){
+                        HStack{
+                            Text("Clear All Tokens")
+                            Spacer()
+                            Image(systemName: "play.circle")
+                                .foregroundColor(Color.blue)
+                                .scaleEffect(1.5)
+                        }
+                    }
                 }
             }
         }
