@@ -6,7 +6,7 @@ Not a real Kerberos. It doesn't communicate with actual servers. Just communicat
 
 Used AES-128 with [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift). Coded with SwiftUI.
 
-Supports iOS (not for iPadOS yet), macOS (Catalyst Project).
+Supports iOS, macOS (Catalyst Project).
 
 ## Fundamental Algorithm
 

@@ -123,6 +123,7 @@ struct ContentView: View {
                 Spacer()
                     .frame(height: 20)
             }
+            .navigationViewStyle(StackNavigationViewStyle())
             .navigationBarTitle(Text("Kerberos"))
             .navigationBarItems(trailing: navtigationBarButton)
             .alert(isPresented: $enviromentClass.showAlert, content: {self.alert})
