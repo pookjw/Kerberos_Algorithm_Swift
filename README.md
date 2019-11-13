@@ -24,11 +24,11 @@ These are combined on Token1.
 
 - messageC : messageB
 
-- messageD : Authenticator (Client ID) encrypted with the TGS Session Key (from messageA)
+- messageD : Authenticator (Client ID, timestamp) encrypted with the TGS Session Key (from messageA)
 
 These are combined on Token2. Now Client knows TGS Session Key from messageA.
 
-3. The TGS retrieves messageC and decrypts using TGS Secret key and gets TGS Session Key. Using this key, the TGS decrypts messageD and compare Client ID from C and D. If they match,
+3. The TGS retrieves messageC and decrypts using TGS Secret key and gets TGS Session Key. Using this key, the TGS decrypts messageD and check timestamp, compare Client ID from C and D. If they match,
 
 - messageE : Client-to-server ticket (Client ID, Server Session Key) encrypted using the Server Secret Key
 
@@ -40,13 +40,13 @@ These are combined on Token3.
 
 - messageE : messageE from the previous step
 
-- messageG : another Authenticator (Client ID) encrypted using Server Session key 
+- messageG : another Authenticator (Client ID, timestamp) encrypted using Server Session key 
  
  These are combined on Token4.
  
 5. SS decrypts messageE using Server secret key and gets Server Session Key. Using this Server Session Key, SS decrypts messageG and compare Client ID. If match,
 
-- messageH : timestamp encrypted using Server Session Key.
+- messageH : the timestamp found in messageG
 
 This is called on Token5.
 

@@ -24,7 +24,7 @@ final class EnviromentClass: ObservableObject{
     @Published var showSheet = false // ServerView
     @Published var return_code: Int? // Return value from Kerberos.swift - runKerberos()
     @Published var GTMode = false // Golden Ticket Mode
-    @Published var timeout = 3
+    @Published var timeout = 100
     @Published var delay = 0
     @Published var log: String
     

@@ -95,7 +95,11 @@ class Kerberos{
     func stage3(log: inout String) -> Int{
         do{
             add_log(2, log: &log)
-            client.token3 = try servers.tgs.stage3(token2: client.token2)
+            client.token3 = try servers.tgs.stage3(token2: client.token2, timeout: timeout, delay: delay)
+        } catch TGS.TGS_ERROR.TIMEOUT{
+            add_log(text: "- Error: Timeout!", log: &log)
+            client.success_server_list[server_number] = false
+            return 1
         } catch let error as NSError {
             add_log(text: "Error: \(error)", log: &log)
             client.success_server_list[server_number] = false
@@ -166,7 +170,11 @@ class Kerberos{
     func gt_stage2(log: inout String) -> Int{
         do{
             add_log(2, log: &log)
-            hacker!.token3 = try servers.tgs.stage3(token2: hacker!.token2)
+            hacker!.token3 = try servers.tgs.stage3(token2: hacker!.token2, timeout: timeout, delay: delay)
+        } catch TGS.TGS_ERROR.TIMEOUT{
+            add_log(text: "- Error: Timeout!", log: &log)
+            client.success_server_list[server_number] = false
+            return 1
         } catch let error as NSError {
             add_log(text: "Error: \(error)", log: &log)
             client.success_server_list[server_number] = false
@@ -277,6 +285,7 @@ class Client{
         tgs_session_key = try token1!.encrypted_tgs_session_key_with_client.decrypt(key: client_key, iv: client_iv)
         tgs_session_iv = try token1!.encrypted_tgs_seesion_iv_with_client.decrypt(key: client_key, iv: client_iv)
         result.encrypted_client_id_with_tgs_session = try client_id.encrypt(key: tgs_session_key, iv: tgs_session_iv)
+        result.encrypted_timestamp_tgs_session = try getTimestamp().encrypt(key: tgs_session_key, iv: tgs_session_iv)
         return result
     }
     
@@ -287,12 +296,12 @@ class Client{
         var result = Token4()
         server_session_key = try token3!.encrypted_server_session_key_with_tgs_session.decrypt(key: tgs_session_key, iv: tgs_session_iv)
         server_session_iv = try token3!.encrypted_server_seesion_iv_with_tgs_session.decrypt(key: tgs_session_key, iv: tgs_session_iv)
-        let encrypted_client_id_with_server_session = try client_id.encrypt(key: server_session_key, iv: server_session_iv)
         
         result.encrypted_client_id_with_server_secret_key = token3!.encrypted_client_id_with_server_secret_key
         result.encrypted_server_seesion_key_with_server_secret = token3!.encrypted_server_seesion_key_with_server_secret
         result.encrypted_server_seesion_iv_with_server_secret = token3!.encrypted_server_seesion_iv_with_server_secret
-        result.encrypted_client_id_with_server_session = encrypted_client_id_with_server_session
+        result.encrypted_client_id_with_server_session = try client_id.encrypt(key: server_session_key, iv: server_session_iv)
+        result.encrypted_timestamp_with_server_session = try getTimestamp().encrypt(key: server_session_key, iv: server_session_iv)
         
         return result
     }
@@ -302,14 +311,8 @@ class Client{
             throw CLIENT_ERROR.TOKEN5_IS_NIL
         }
         
-        let dataformatter = DateFormatter()
-        dataformatter.dateFormat = "yyyyMMddHHmmss'00'"
-        
         let ss_time_uint8_array = try token5!.encrypted_timestamp_with_server_session.decrypt(key: server_session_key, iv: server_session_iv)
-        let ss_time_date = dataformatter.date(from: ss_time_uint8_array.toString)
-        sleep(delay)
-        
-        if Date().timeIntervalSince(ss_time_date!) > timeout{
+        if isTimestampExpired(timestamp: ss_time_uint8_array, timeout: timeout, delay: delay){
             throw CLIENT_ERROR.TIMEOUT
         }
     }
@@ -320,19 +323,12 @@ class Client{
         tgs_session_key = randomArray()
         tgs_session_iv = randomArray()
         
-        /*
-        struct Token2{
-            var encrypted_client_id_with_tgs_secret = Array<UInt8>() // messageC
-            var encrypted_tgs_seesion_key_with_tgs_secret = Array<UInt8>() // messageC
-            var encrypted_tgs_seesion_iv_with_tgs_secret = Array<UInt8>() // messageC
-            var encrypted_client_id_with_tgs_session = Array<UInt8>() // messageD
-        }
-         */
         result.encrypted_client_id_with_tgs_secret = try fake_client_id.encrypt(key: tgs_secret_key, iv: tgs_secret_iv)
         result.encrypted_tgs_seesion_key_with_tgs_secret = try tgs_session_key.encrypt(key: tgs_secret_key, iv: tgs_secret_iv)
         result.encrypted_tgs_seesion_iv_with_tgs_secret = try tgs_session_iv.encrypt(key: tgs_secret_key, iv: tgs_secret_iv)
         
         result.encrypted_client_id_with_tgs_session = try fake_client_id.encrypt(key: tgs_session_key, iv: tgs_session_iv)
+        result.encrypted_timestamp_tgs_session = try getTimestamp().encrypt(key: tgs_session_key, iv: tgs_session_iv)
         
         return result
     }
@@ -344,12 +340,12 @@ class Client{
         var result = Token4()
         server_session_key = try token3!.encrypted_server_session_key_with_tgs_session.decrypt(key: tgs_session_key, iv: tgs_session_iv)
         server_session_iv = try token3!.encrypted_server_seesion_iv_with_tgs_session.decrypt(key: tgs_session_key, iv: tgs_session_iv)
-        let encrypted_client_id_with_server_session = try fake_client_id.encrypt(key: server_session_key, iv: server_session_iv)
         
         result.encrypted_client_id_with_server_secret_key = token3!.encrypted_client_id_with_server_secret_key
         result.encrypted_server_seesion_key_with_server_secret = token3!.encrypted_server_seesion_key_with_server_secret
         result.encrypted_server_seesion_iv_with_server_secret = token3!.encrypted_server_seesion_iv_with_server_secret
-        result.encrypted_client_id_with_server_session = encrypted_client_id_with_server_session
+        result.encrypted_client_id_with_server_session = try fake_client_id.encrypt(key: server_session_key, iv: server_session_iv)
+        result.encrypted_timestamp_with_server_session = try getTimestamp().encrypt(key: server_session_key, iv: server_session_iv)
         
         return result
     }
@@ -397,10 +393,11 @@ class TGS: Server{
     }
     
     enum TGS_ERROR: Error{
-        case ID_IS_NOT_MATCHING
         case TOKEN2_IS_NIL
+        case ID_IS_NOT_MATCHING
+        case TIMEOUT
     }
-    func stage3(token2: Token2?) throws -> Token3{
+    func stage3(token2: Token2?, timeout: Double, delay: UInt32) throws -> Token3{
         if token2 == nil{
             throw TGS_ERROR.TOKEN2_IS_NIL
         }
@@ -408,17 +405,22 @@ class TGS: Server{
         var result = Token3()
         let tgs_session_key = try token2!.encrypted_tgs_seesion_key_with_tgs_secret.decrypt(key: secret_key, iv: secret_iv)
         let tgs_session_iv = try token2!.encrypted_tgs_seesion_iv_with_tgs_secret.decrypt(key: secret_key, iv: secret_iv)
-        let client_id_from_session = try token2!.encrypted_client_id_with_tgs_session.decrypt(key: tgs_session_key, iv: tgs_session_iv)
-        let client_id_from_secret = try token2!.encrypted_client_id_with_tgs_secret.decrypt(key: secret_key, iv: secret_iv)
+        let client_id_from_tgs_session = try token2!.encrypted_client_id_with_tgs_session.decrypt(key: tgs_session_key, iv: tgs_session_iv)
+        let client_id_from_tgs_secret = try token2!.encrypted_client_id_with_tgs_secret.decrypt(key: secret_key, iv: secret_iv)
+        let timestamp_from_tgs_session = try token2!.encrypted_timestamp_tgs_session.decrypt(key: tgs_session_key, iv: tgs_session_iv)
         
-        if client_id_from_session != client_id_from_secret{
+        if isTimestampExpired(timestamp: timestamp_from_tgs_session, timeout: timeout, delay: delay){
+            throw TGS_ERROR.TIMEOUT
+        }
+        
+        if client_id_from_tgs_session != client_id_from_tgs_secret{
             throw TGS_ERROR.ID_IS_NOT_MATCHING
         }
         
         let server_session_key = randomArray()
         let server_session_iv = randomArray()
         
-        result.encrypted_client_id_with_server_secret_key = try client_id_from_session.encrypt(key: ss_delegate!.secret_key, iv: ss_delegate!.secret_iv)
+        result.encrypted_client_id_with_server_secret_key = try client_id_from_tgs_session.encrypt(key: ss_delegate!.secret_key, iv: ss_delegate!.secret_iv)
         result.encrypted_server_seesion_key_with_server_secret = try server_session_key.encrypt(key: ss_delegate!.secret_key, iv: ss_delegate!.secret_iv)
         result.encrypted_server_seesion_iv_with_server_secret = try server_session_iv.encrypt(key: ss_delegate!.secret_key, iv: ss_delegate!.secret_iv)
         result.encrypted_server_session_key_with_tgs_session = try server_session_key.encrypt(key: tgs_session_key, iv: tgs_session_iv)
@@ -443,10 +445,6 @@ class SS: Server{
             throw SS_ERROR.TOKEN4_IS_NIL
         }
         
-        let dataformatter = DateFormatter()
-        dataformatter.dateFormat = "yyyyMMddHHmmss'00'"
-        let current_time_uint8_array = dataformatter.string(from: Date()).toArrayUInt8
-        
         var result = Token5()
         
         let server_session_key = try token4!.encrypted_server_seesion_key_with_server_secret.decrypt(key: secret_key, iv: secret_iv)
@@ -460,7 +458,7 @@ class SS: Server{
             throw SS_ERROR.ID_IS_NOT_MATCHING
         }
         
-        result.encrypted_timestamp_with_server_session = try current_time_uint8_array.encrypt(key: server_session_key, iv: server_session_iv)
+        result.encrypted_timestamp_with_server_session = token4!.encrypted_timestamp_with_server_session
         return result
     }
 }
@@ -488,6 +486,7 @@ struct Token2{
     var encrypted_tgs_seesion_key_with_tgs_secret = Array<UInt8>() // messageC
     var encrypted_tgs_seesion_iv_with_tgs_secret = Array<UInt8>() // messageC
     var encrypted_client_id_with_tgs_session = Array<UInt8>() // messageD
+    var encrypted_timestamp_tgs_session = Array<UInt8>() // messageD
 }
 
 struct Token3{
@@ -503,6 +502,7 @@ struct Token4{
     var encrypted_server_seesion_key_with_server_secret = Array<UInt8>() // messageE
     var encrypted_server_seesion_iv_with_server_secret = Array<UInt8>() // messageE
     var encrypted_client_id_with_server_session = Array<UInt8>() // messageG
+    var encrypted_timestamp_with_server_session = Array<UInt8>() // messageG
 }
 
 struct Token5{
@@ -522,6 +522,12 @@ func randomArray(input: String) -> [UInt8]{
     return Array<UInt8>(input.utf8)
 }
 
+func getTimestamp() -> [UInt8] {
+    let dataformatter = DateFormatter()
+    dataformatter.dateFormat = "yyyyMMddHHmmss'00'"
+    return dataformatter.string(from: Date()).toArrayUInt8
+}
+
 extension String{
     var toArrayUInt8: [UInt8]{
         Array<UInt8>(self.utf8)
@@ -532,6 +538,18 @@ extension Array where Element == UInt8 {
     var toString: String{
         String(bytes: self, encoding: .utf8)!
     }
+}
+
+func isTimestampExpired(timestamp: [UInt8], timeout: Double, delay: UInt32) -> Bool{
+    let dataformatter = DateFormatter()
+    dataformatter.dateFormat = "yyyyMMddHHmmss'00'"
+    sleep(delay)
+    let timestamp_date = dataformatter.date(from: timestamp.toString)
+    
+    if Date().timeIntervalSince(timestamp_date!) > timeout{
+        return true
+    }
+    return false
 }
 
 extension Array where Iterator.Element == UInt8{
