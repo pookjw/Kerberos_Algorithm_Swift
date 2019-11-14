@@ -13,7 +13,8 @@ struct ContentView: View {
 
     var navtigationBarButton: some View{
         HStack{
-            // When SBSMode (Step By Step) is off, show this button. This button runs all algoritgm.
+            // When SBS (Step By Step) Mode is off, show this button. This button runs all algoritgm.
+            // Kerberos(...).run_all(log:)
             if !self.enviromentClass.SBSMode{
                 // When GTMode (Golden Ticket Mode) is true(on), it shows yellow button on Navigation Bar. If not, shows blue button.
                 if !self.enviromentClass.GTMode{
@@ -58,7 +59,7 @@ struct ContentView: View {
         }
     }
     
-    // When running algorithm was done, will show this.
+    // When running algorithm was done, will show this. returned 0 value is Success, 1 is Error.
     var alert: Alert{
         Alert(title: Text("Result"),
               message: self.enviromentClass.return_code == 0 ? Text("Success!") : Text("Error! Check result log!"),
@@ -67,11 +68,14 @@ struct ContentView: View {
         )
     }
     
+    // Body
     var body: some View {
         NavigationView{
             VStack{
                 Spacer()
                 LogView()
+                
+                // If SBS (Step By Step) is On or Off.
                 if self.enviromentClass.SBSMode{
                     if !self.enviromentClass.GTMode{
                         StepListView(kerberos: Kerberos(
@@ -99,6 +103,7 @@ struct ContentView: View {
                 Spacer()
                     .frame(height: 10)
                 
+                // Show GT (Golden Ticket) Mode status
                 if self.enviromentClass.GTMode{
                     Text("Golden Ticket Mode: (Enabled)")
                         .font(.system(size: 15))
@@ -106,15 +111,22 @@ struct ContentView: View {
                     Text("Golden Ticket Mode: (Disabled)")
                         .font(.system(size: 15))
                 }
+                
+                // Show Selected Client
                 Text("Selected Client: \(self.enviromentClass.client_list[self.enviromentClass.selected_client].client_id.toString)")
                     .font(.system(size: 15))
+                
+                // Show Selected Hacker when GT Mode is enabled
                 if self.enviromentClass.GTMode{
                     Text("Selected Hacker: \(self.enviromentClass.client_list[self.enviromentClass.selected_hacker].client_id.toString)")
                         .font(.system(size: 15))
                 }
+                
+                // Show Selected Server
                 Text("Selected Server: \(self.enviromentClass.selected_server)")
                     .font(.system(size: 15))
                 
+                // Link Kerberos Settings View
                 NavigationLink(destination: SettingsView()){
                     Image(systemName: "gear")
                     Text("Settings...")
@@ -123,10 +135,10 @@ struct ContentView: View {
                 Spacer()
                     .frame(height: 20)
             }
-            .navigationViewStyle(StackNavigationViewStyle())
+            .navigationViewStyle(StackNavigationViewStyle()) // for iPadOS
             .navigationBarTitle(Text("Kerberos"))
             .navigationBarItems(trailing: navtigationBarButton)
-            .alert(isPresented: $enviromentClass.showAlert, content: {self.alert})
+            .alert(isPresented: $enviromentClass.showAlert, content: {self.alert}) // show alert when running Kerberos function was done
         }
     }
 }

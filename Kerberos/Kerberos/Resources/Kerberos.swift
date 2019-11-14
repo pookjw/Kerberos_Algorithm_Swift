@@ -9,6 +9,7 @@
 import Foundation
 import CryptoSwift
 
+// Collection of Kerberos objects
 class Kerberos{
     let servers: Session
     let client: Client
@@ -25,6 +26,7 @@ class Kerberos{
         self.delay = delay
     }
     
+    // add log to enviromentClass.log
     func add_log(_ number: Int, log: inout String){
         let list = [
             "- Requesting token1 to Authentication Server...", // 0
@@ -46,6 +48,8 @@ class Kerberos{
         print(text)
         log += "\n\(text)"
     }
+    
+    // Clear all saved Client's tokens
     func clear_all(){
         client.token1 = nil
         client.token2 = nil
@@ -61,6 +65,7 @@ class Kerberos{
         }
     }
     
+    // Check description at https://github.com/pookjw/Kerberos_Algorithm_Swift#fundamental-algorithm
     func stage1(log: inout String) -> Int{
         add_log(text: "", log: &log)
         add_log(text: "Client: \(client.client_id.toString)", log: &log)
@@ -150,6 +155,7 @@ class Kerberos{
         return 0
     }
     
+    // Golden Ticket forges Token2 (TGT and Authenticator), so there's no normal stage1; GT Mode is total 5 stages.
     func gt_stage1(log: inout String) -> Int{
         add_log(text: "", log: &log)
         add_log(text: "Client: \(client.client_id.toString)", log: &log)
@@ -225,6 +231,8 @@ class Kerberos{
         return 0
     }
     
+    // Run all stages. At class initialization, if hacker is nil that is normal Kerberos Mode. If not (hacker is not nil), that is Golden Ticket Mode.
+    // View gets return code, if gets 1 code shows Error AlertView, and 0 code shows Success AlertView.
     func run_all(log: inout String) -> Int{
         if hacker == nil{ // If GT_Mode is off
             if stage1(log: &log) == 1 { clear_all(); return 1 }
@@ -244,15 +252,19 @@ class Kerberos{
     }
 }
 
+// To Share Secret Key
 protocol Server: AnyObject{
     var secret_key: [UInt8]{get}
     var secret_iv: [UInt8]{get}
 }
 
+// Client
 class Client{
     let client_id: [UInt8]
     let client_key: [UInt8]
     let client_iv: [UInt8]
+    
+    // Check Token definition at below (struct), and https://github.com/pookjw/Kerberos_Algorithm_Swift#fundamental-algorithm
     var token1: Token1?
     var token2: Token2?
     var token3: Token3?
@@ -317,6 +329,7 @@ class Client{
         }
     }
     
+    // Golden Ticket Stage
     func gt_stage_2(fake_client_id: [UInt8], tgs_secret_key: [UInt8], tgs_secret_iv: [UInt8]) throws -> Token2{
         var result = Token2()
         
@@ -351,6 +364,7 @@ class Client{
     }
 }
 
+// Authentication Server
 class AS{
     var client_id_list: [[UInt8]] = []
     var client_key_list: [[UInt8]: [UInt8]] = [:]
@@ -383,6 +397,7 @@ class AS{
     }
 }
 
+// Ticket Granting Server
 class TGS: Server{
     let secret_key: [UInt8]
     let secret_iv: [UInt8]
@@ -429,6 +444,7 @@ class TGS: Server{
     }
 }
 
+// Service Server
 class SS: Server{
     let secret_key: [UInt8]
     let secret_iv: [UInt8]
@@ -463,6 +479,7 @@ class SS: Server{
     }
 }
 
+// Initializing Server Session
 class Session{
     let `as` = AS()
     let tgs = TGS()

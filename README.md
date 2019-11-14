@@ -6,7 +6,7 @@ Not a real Kerberos. It doesn't communicate with actual servers. Just communicat
 
 Used AES-128 with [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift). Coded with SwiftUI.
 
-Supports iOS, macOS (Catalyst Project).
+Supports iOS, macOS (Mac Catalyst Project).
 
 ## Fundamental Algorithm
 
@@ -162,6 +162,8 @@ Go to **Settings (gear icon) → Miscellaneous →  Theme Settings**
 
 - Fix SwiftUI EnviromentObject refresh bug: Added Refresh button. This is a SwiftUI bug. Apple should fix this. Check [here](https://stackoverflow.com/questions/57727478/refreshing-a-swiftui-list) to hack this.
 
+- Fix SwiftUI Preview Bug. (No problem on running app actually)
+
 - ~~Add Kerberos fundamental vulnerability~~ Done
 
 - ~~Enhance timestamp~~ Done
@@ -170,6 +172,6 @@ Go to **Settings (gear icon) → Miscellaneous →  Theme Settings**
 
 - More error handling
 
-- Rich comments
+- Rich comments (Almost Done)
 
 - Multi Encryption Algorithm

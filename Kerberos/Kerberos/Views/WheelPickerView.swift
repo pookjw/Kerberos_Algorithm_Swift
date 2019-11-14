@@ -31,8 +31,6 @@ struct WheelPickerView: View{
                 .scaledToFit()
                 Spacer()
             }
-                //.offset(x: -100)
-                //.padding(.horizontal, 99999999999.0)
         }
         .navigationBarTitle(title)
     }
