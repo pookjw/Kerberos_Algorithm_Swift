@@ -32,15 +32,15 @@ struct ServerView: View {
                 HStack{
                     Button(action: {self.enviromentClass.selected_server = value}){
                         HStack{
-                        if self.enviromentClass.selected_server == value{
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(Color.blue)
-                        }else{
-                            Image(systemName: "circle")
-                                .foregroundColor(Color.gray)
-                        }
-                        Text("Server: \(value)")
-                        Spacer()
+                            if self.enviromentClass.selected_server == value{
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(Color.blue)
+                            }else{
+                                Image(systemName: "circle")
+                                    .foregroundColor(Color.gray)
+                            }
+                            Text("Server: \(value)")
+                            Spacer()
                         }
                     }
                 }
@@ -143,13 +143,15 @@ struct ClientListView: View{
                 }){
                     HStack{
                         if self.enviromentClass.server_list[self.server_number].as.client_id_list.contains(self.enviromentClass.client_list[value].client_id){
-                        Text(self.enviromentClass.client_list[value].client_id.toString)
-                            .foregroundColor(Color.gray)
-                        Spacer()
-                        Text("Signed")
-                            .foregroundColor(Color.gray)
+                            Text(self.enviromentClass.client_list[value].client_id.toString)
+                                .foregroundColor(Color.gray)
+                            Spacer()
+                            Text("(signed)")
+                                .foregroundColor(Color.gray)
                         }else{
                             Text(self.enviromentClass.client_list[value].client_id.toString)
+                            Spacer()
+                            Text("(not signed)")
                         }
                     }
                 }
